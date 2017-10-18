@@ -45,10 +45,10 @@ public class Arme {
 	 * @param puissDef
 	 */
 	public Arme(int idArme, String nomArme, int puissOff, int puissDef){
-		this.setIdArme(idArme);
-		this.setNomArme(nomArme);
-		this.setPuissanceOffensive(puissOff);
-		this.setPuissanceDefensive(puissDef);
+		this.idArme = idArme;
+		this.nomArme = nomArme;
+		this.puissanceOffensive = puissOff;
+		this.puissanceDefensive = puissDef;
 	}
 	
 	/**
@@ -57,7 +57,8 @@ public class Arme {
 	 */
 	public String description(){
 		
-		return "ID arme : " + this.getIdArme + ", Nom de l'arme : " + this.getNomArme + ", Puissance offensive : " + this.getPuissanceOffensive + ", Puissance défensive : " + this.getPuissanceDefensive + ". ";	
+		return "ID arme : " + this.idArme + ", Nom de l'arme : " + this.nomArme + ", Puissance offensive : " + this.puissanceOffensive + ", Puissance défensive : " + this.puissanceDefensive + ". ";
+		
 	}
 	/**
 	 * Retourne le nom de l'arme
@@ -114,12 +115,15 @@ public class Arme {
 			System.out.println("puissanceDefensive incorrecte");
 		}
 	}
-    
-	private void setNomArme(String nomArme) {
-		this.nomArme = nomArme;
-	}
 
-    private void setIdArme(int idArme) {
-        this.idArme = idArme();
-    }
+	
+
+	
+
+	
+
+	
+	
+	
+
 }
