@@ -15,15 +15,51 @@ import modele.Gladiateur;
 public class Facade {
 	
 	// Variable de classe
-	private GGladiateur gGladiateur;
-	private GArme gArme;
+	private static GGladiateur gGladiateur;
+	private static GArme gArme;
 	
 	/**
 	 * Constructeur
 	 */
-	public Facade() {
-		this.gGladiateur = new GGladiateur();
-		this.gArme=new GArme();
+	public  Facade() {
+		gGladiateur = new GGladiateur();
+		gArme=new GArme();
+	}
+	
+	
+	
+	/**
+	 *  Initialise le jeu d'essai
+	 */
+	public static void lancerJeuDEssai() {
+		creerRetiaire("Unix", 30);
+		creerMirmillon("Infomatix", 100);
+		creerRetiaire("Ceplusplus", 40);
+		creerMirmillon("Pythonus", 60);
+		creerRetiaire("Szervlet", 50);
+		creerMirmillon("Ramazmjet", 80);
+		//Créer les armes
+		creerUneArme("Glaive", 80, 0);
+		creerUneArme("trident", 100, 0);
+		creerUneArme("Filet", 40, 20);
+		creerUneArme("Bouclier", 40, 40);
+		creerUneArme("Casque", 0, 20);
+		creerUneArme("Jambière", 0, 10);
+		donnerUneArme(1, 2);
+		donnerUneArme(1, 6);
+		donnerUneArme(1, 3);
+		donnerUneArme(2, 1);
+		donnerUneArme(2, 4);
+		donnerUneArme(2, 5);
+		donnerUneArme(2, 6);	
+		donnerUneArme(3, 2);
+		donnerUneArme(3, 6);
+		donnerUneArme(4, 1);
+		donnerUneArme(4, 4);
+		donnerUneArme(5, 1);
+		donnerUneArme(5, 6);
+		donnerUneArme(6, 4);
+		donnerUneArme(6, 5);
 	}
 	
 	/**
@@ -32,8 +68,8 @@ public class Facade {
 	 * @param pAgilite agilit� du gladiateur
 	 * @return le gladiateur cr�er
 	 */
-	public Gladiateur creerRetiaire(String pNom, int pAgilite) {
-		return this.gGladiateur.ajouterRetiaire(pNom, pAgilite);
+	public static Gladiateur creerRetiaire(String pNom, int pAgilite) {
+		return gGladiateur.ajouterRetiaire(pNom, pAgilite);
 	}
 	
 	/**
@@ -42,15 +78,15 @@ public class Facade {
 	 * @param pAgilite agilit� du gladiateur
 	 * @return le gladiateur cr�er
 	 */
-	public Gladiateur creerMirmillon(String pNom, int pPoids) {
-		return this.gGladiateur.ajouterMirmillon(pNom, pPoids);
+	public static Gladiateur creerMirmillon(String pNom, int pPoids) {
+		return gGladiateur.ajouterMirmillon(pNom, pPoids);
 	}
 	
 	/**
 	 * @return la liste des gladiateurs
 	 */
-	public ArrayList<Gladiateur> listertousLesGladiateurs() {
-		return this.gGladiateur.getTousLesGladiateurs();
+	public static ArrayList<Gladiateur> listerTousLesGladiateurs () {
+		return gGladiateur.getTousLesGladiateurs();
 	}
 	
 	/**
@@ -58,8 +94,8 @@ public class Facade {
 	 * @param pIdGladiateur
 	 * @return liste des gladiateurs (objet) 
 	 */
-	public ArrayList<Gladiateur> listerAgresseurs(int pIdGladiateur) {
-		return this.gGladiateur.getGladiateur(pIdGladiateur).getMesAggresseurs();	
+	public static ArrayList<Gladiateur> listerAgresseurs(int pIdGladiateur) {
+		return gGladiateur.getGladiateur(pIdGladiateur).getMesAggresseurs();	
 	}
 	
 	/**
@@ -67,8 +103,8 @@ public class Facade {
 	 * @param pIdGladiateur
 	 * @return String 
 	 */
-	public String faireSaluerGladiateur(int pIdGladiateur) {
-		return this.gGladiateur.getGladiateur(pIdGladiateur).saluer();
+	public static String faireSaluerGladiateur(int pIdGladiateur) {
+		return gGladiateur.getGladiateur(pIdGladiateur).saluer();
 	}
 	
 	/**
@@ -76,8 +112,8 @@ public class Facade {
 	 * @param pIdGladiateur
 	 * @return String
 	 */
-	public String faireRapport(int pIdGladiateur) {
-		return this.gGladiateur.getGladiateur(pIdGladiateur).rapport();
+	public static String faireRapport(int pIdGladiateur) {
+		return gGladiateur.getGladiateur(pIdGladiateur).rapport();
 	}
 	
 	/**
@@ -85,8 +121,8 @@ public class Facade {
 	 * @param pIdGladiateur
 	 * @return ArrayList<Arme>
 	 */
-	public ArrayList<Arme> declarerArmes(int pIdGladiateur) {
-		return this.gGladiateur.getGladiateur(pIdGladiateur).getMesArmes();
+	public static ArrayList<Arme> declarerArmes(int pIdGladiateur) {
+		return gGladiateur.getGladiateur(pIdGladiateur).getMesArmes();
 	}
 	
 	
@@ -94,8 +130,8 @@ public class Facade {
 	 * Supprime le gladiateur dont l'id est pass� en param�tre
 	 * @param pIdGladiateur : int
 	 */
-	public void supprimerGladiateur(int pIdGladiateur) {
-		this.gGladiateur.supprimerGladiateur(pIdGladiateur);
+	public static void supprimerGladiateur(int pIdGladiateur) {
+		gGladiateur.supprimerGladiateur(pIdGladiateur);
 	}
 	
 	/**
@@ -105,8 +141,8 @@ public class Facade {
 	 * @param pPuissDef : int
 	 * @return Arme
 	 */
-	public Arme creerUneArme(String pNom, int pPuissOff, int pPuissDef) {
-		return this.gArme.ajouterArme(pNom, pPuissOff, pPuissDef);
+	public static Arme creerUneArme(String pNom, int pPuissOff, int pPuissDef) {
+		return gArme.ajouterArme(pNom, pPuissOff, pPuissDef);
 	}
 	
 	
@@ -115,8 +151,8 @@ public class Facade {
 	 * @param pIdGladiateur : int
 	 * @param pIdArme : int
 	 */
-	public void donnerUneArme(int pIdGladiateur, int pIdArme) {
-		this.gGladiateur.getGladiateur(pIdGladiateur).recevoirArme(this.gArme.getArme(pIdArme));
+	public static void donnerUneArme(int pIdGladiateur, int pIdArme) {
+		gGladiateur.getGladiateur(pIdGladiateur).recevoirArme(gArme.getArme(pIdArme));
 	}
 	
 	/**
@@ -124,8 +160,8 @@ public class Facade {
 	 * @param pIdArme
 	 * @return String
 	 */
-	public String decrireArme(int pIdArme) {
-		return this.gArme.getArme(pIdArme).description();
+	public static String decrireArme(int pIdArme) {
+		return gArme.getArme(pIdArme).description();
 	}
 	
 	/**
@@ -133,8 +169,8 @@ public class Facade {
 	 * @param pIdArme
 	 * @return String
 	 */
-	public String nomArme(int pIdArme) {
-		return this.gArme.getArme(pIdArme).getNomArme();
+	public static String nomArme(int pIdArme) {
+		return gArme.getArme(pIdArme).getNomArme();
 	}
 	
 	/**
@@ -143,9 +179,9 @@ public class Facade {
 	 * @param pIdVictime : int
 	 * @param pIdArme: int
 	 */
-	public void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) {
-		if(!this.gGladiateur.getGladiateur(pIdAgresseur).estMoribond() && ! this.gGladiateur.getGladiateur(pIdVictime).estMoribond()) {
-			this.gGladiateur.getGladiateur(pIdAgresseur).frapper(this.gGladiateur.getGladiateur(pIdVictime), this.gArme.getArme(pIdArme));
+	public static void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) {
+		if(!gGladiateur.getGladiateur(pIdAgresseur).estMoribond() && ! gGladiateur.getGladiateur(pIdVictime).estMoribond()) {
+			gGladiateur.getGladiateur(pIdAgresseur).frapper(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme));
 		}
 	}
 	

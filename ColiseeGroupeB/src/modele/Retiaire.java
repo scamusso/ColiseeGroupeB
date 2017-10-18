@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 public class Retiaire extends Gladiateur  {
 
-	private static int cForce;
-	private static String cType;
+
+	private static int cForce = 30;
+	private static String cType = "Retiaire";
 	private int agilite;
 	private ArrayList<Gladiateur> agresseurs;
 	
@@ -26,10 +27,8 @@ public class Retiaire extends Gladiateur  {
 	 */
 	public Retiaire(int idGladiateur, String nomGladiateur, int agilite) {
 		super(idGladiateur, nomGladiateur);
-		Retiaire.cForce = 30;
-		this.agilite = agilite;
-		Retiaire.cType = "Retiaire";
-		this.agresseurs = new ArrayList<Gladiateur>();
+		this.setAgilite(agilite);
+		this.setAgresseurs(new ArrayList<Gladiateur>()); 
 	}
 	
 	/**
@@ -93,9 +92,38 @@ public class Retiaire extends Gladiateur  {
 	
 	//Setters
 	
-	public void setCType() {
+	private void setCType() {
 		Retiaire.cType = "Retiaire";
 	}
+	
+	private static int getcForce() {
+		return cForce;
+	}
+
+	private static void setcForce(int cForce) {
+		Retiaire.cForce = cForce;
+	}
+
+	private static String getcType() {
+		return cType;
+	}
+
+	private static void setcType(String cType) {
+		Retiaire.cType = cType;
+	}
+
+	private ArrayList<Gladiateur> getAgresseurs() {
+		return agresseurs;
+	}
+
+	private void setAgresseurs(ArrayList<Gladiateur> agresseurs) {
+		this.agresseurs = agresseurs;
+	}
+
+	private void setAgilite(int agilite) {
+		this.agilite = agilite;
+	}
+
 	
 
 

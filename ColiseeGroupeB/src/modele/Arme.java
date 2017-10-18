@@ -27,7 +27,7 @@ public class Arme {
 	 * puissance defensive de l'arme
 	 * est modifiable
 	 */
-	int puissanceDefensive;
+	private int puissanceDefensive;
 	
 	/**
 	 * puissance offensive de l'arme

@@ -20,10 +20,10 @@ public class GArme {
 	/**
 	 * Liste des armes creees
 	 */
-	private ArrayList<Arme> toutesLesArmes;
+	private static ArrayList<Arme> toutesLesArmes;
 	
 	public GArme() {
-		this.toutesLesArmes= new ArrayList<Arme>();
+		toutesLesArmes= new ArrayList<Arme>();
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class GArme {
 	 * @param puissDef
 	 * @return arme
 	 */
-	public Arme ajouterArme(String nomArme, int puissOff, int puissDef) {
-		this.toutesLesArmes.add(new Arme(nextIdArme++, nomArme, puissOff, puissDef));		
-		return this.toutesLesArmes.get(this.toutesLesArmes.size()-1);
+	public static Arme ajouterArme(String nomArme, int puissOff, int puissDef) {
+		toutesLesArmes.add(new Arme(nextIdArme++, nomArme, puissOff, puissDef));		
+		return toutesLesArmes.get(toutesLesArmes.size()-1);
 	}
 	
 	/**
@@ -43,8 +43,8 @@ public class GArme {
 	 * @param idArme
 	 * @return
 	 */
-	public Arme getArme(int idArme){
-		for(Arme arme : this.toutesLesArmes) {
+	public static Arme getArme(int idArme){
+		for(Arme arme : toutesLesArmes) {
 			if(arme.getIdArme() == idArme) {
 				return arme;
 			}	
@@ -55,7 +55,7 @@ public class GArme {
 	/**
 	 * Getter
 	 */
-	public ArrayList<Arme> getToutesLesArmes() {
-		return this.toutesLesArmes;
+	public static ArrayList<Arme> getToutesLesArmes() {
+		return toutesLesArmes;
 	}
 }

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 public abstract class Gladiateur {
 	
 	private static int cVieInitiale = 200;
-	private int id;
+	private int idGladiateur ;
 	private String nom;
 	private int vie;
-	private ArrayList<Arme> armes;
+	private ArrayList<Arme> mesArmes;
 
 	
 	/**
@@ -28,10 +28,10 @@ public abstract class Gladiateur {
 	 * 
 	 */
 	public Gladiateur(int idGladiateur, String nomGladiateur) {
-		this.id = idGladiateur;
+		this.idGladiateur  = idGladiateur;
 		this.vie = cVieInitiale;
 		this.nom = nomGladiateur;
-		this.armes = new ArrayList<Arme>();
+		this.mesArmes = new ArrayList<Arme>();
 		
 	}
 
@@ -42,13 +42,15 @@ public abstract class Gladiateur {
 	 * 
 	 * @return
 	 */
-	public String declarerMesArmes() {
-		String declarationArme = "";
-		System.out.println("Je possede les armes suivantes : ");
-		for (Arme object: armes) {
-		    declarationArme = declarationArme + object.description();
+	public String[] declarerMesArmes() {
+		String tableauArmes[] = new String[mesArmes.size()];
+		int compteur = 0;
+		for (Arme object: mesArmes) {
+			tableauArmes[compteur] = object.description();
+			compteur++;
+			
 		}
-		return declarationArme;
+		return tableauArmes;
 	}
 	
 	/**
@@ -122,7 +124,7 @@ public abstract class Gladiateur {
 			etatGladiateur = "Moribond";
 		}
 		
-		rapport = id + " " + nom + " "+ etatGladiateur + " " + vie + " " + getForce() + " " + declarerMesArmes();
+		rapport = idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + getForce() + " " + declarerMesArmes();
 		return rapport; 
 	}	
 	
@@ -133,13 +135,13 @@ public abstract class Gladiateur {
 	 */
 	public void recevoirArme(Arme arme) {
         boolean flagArme = false;
-        for (Arme object: armes) {
+        for (Arme object: mesArmes) {
             if (object.getNomArme() == arme.getNomArme()) {
                 flagArme = true;
             }
         }
         if (flagArme==false){
-            armes.add(arme);
+        	mesArmes.add(arme);
         }
 
     }
@@ -155,8 +157,8 @@ public abstract class Gladiateur {
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
 		if (agresseur != this){
 			int defArme = 0;
-			for (Arme object: armes) {
-			    defArme = defArme + object.puissanceDefensive;
+			for (Arme object: mesArmes) {
+			    defArme = defArme + object.getPuissanceDefensive();
 			}
 			if ((forceCoup - defArme)>0){
 				this.vie = vie - (forceCoup - defArme);
@@ -189,13 +191,13 @@ public abstract class Gladiateur {
 	public abstract int getForce();
 	
 	public int getIdGladiateur() {
-		return id;
+		return idGladiateur ;
 	}
 	
 	public abstract ArrayList<Gladiateur> getMesAggresseurs();
 	
 	public ArrayList<Arme> getMesArmes() {
-		return armes;
+		return mesArmes;
 	}
 	
 	public String getNom() {
@@ -219,7 +221,7 @@ public abstract class Gladiateur {
 	}
 	
 	public void setMesArmes(ArrayList<Arme> armes) {
-		this.armes = armes;
+		this.mesArmes = armes;
 	}
 	
 

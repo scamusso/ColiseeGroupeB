@@ -18,13 +18,13 @@ public class GGladiateur {
 	
 	// variable de classe
 	private static int nextIdGladiateur = 1;
-	private ArrayList<Gladiateur> lesGladiateurs;
+	private static ArrayList<Gladiateur> tousLesGladiateurs;
 	
 	/***
 	 * Constructeur du gestionnaire
 	 */
 	public GGladiateur() {
-		this.lesGladiateurs = new ArrayList<Gladiateur>();
+		tousLesGladiateurs = new ArrayList<Gladiateur>();
 	};
 	
 	/**
@@ -33,9 +33,9 @@ public class GGladiateur {
 	 * @param pPoids son poids
 	 * @return l'objet gladiateur cr�er
 	 */
-	public Gladiateur ajouterMirmillon(String pNom, int pPoids) {
-		this.lesGladiateurs.add(new Mirmillon(GGladiateur.nextIdGladiateur++,pNom,pPoids));
-		return this.lesGladiateurs.get(this.lesGladiateurs.size()-1);
+	public static Gladiateur ajouterMirmillon(String pNom, int pPoids) {
+		tousLesGladiateurs.add(new Mirmillon(GGladiateur.nextIdGladiateur++,pNom,pPoids));
+		return tousLesGladiateurs.get(tousLesGladiateurs.size()-1);
 	}
 	
 	/**
@@ -44,17 +44,17 @@ public class GGladiateur {
 	 * @param pAgilite son agilit�
 	 * @return l'objet gladiateur cr�er
 	 */
-	public Gladiateur ajouterRetiaire(String pNom, int pAgilite) {
-		this.lesGladiateurs.add(new Retiaire(GGladiateur.nextIdGladiateur++,pNom,pAgilite));
-		return this.lesGladiateurs.get(this.lesGladiateurs.size()-1);
+	public static Gladiateur ajouterRetiaire(String pNom, int pAgilite) {
+		tousLesGladiateurs.add(new Retiaire(GGladiateur.nextIdGladiateur++,pNom,pAgilite));
+		return tousLesGladiateurs.get(tousLesGladiateurs.size()-1);
 	}
 	
 	/**
 	 * M�thode qui renvoie l'ensembles des gladiateurs en jeu
 	 * @return Liste de gladiateurs "ArrayList<Gladiateur>()"
 	 */
-	public ArrayList<Gladiateur> getTousLesGladiateurs() {
-		return this.lesGladiateurs;
+	public static ArrayList<Gladiateur> getTousLesGladiateurs() {
+		return tousLesGladiateurs;
 	}
 	
 	/**
@@ -62,8 +62,8 @@ public class GGladiateur {
 	 * @param pIdGladiateur
 	 * @return Gladiateur
 	 */
-	public Gladiateur getGladiateur(int pIdGladiateur) {
-		for(Gladiateur gladiateur : this.lesGladiateurs) {
+	public static Gladiateur getGladiateur(int pIdGladiateur) {
+		for(Gladiateur gladiateur : tousLesGladiateurs) {
 			if(gladiateur.getIdGladiateur()==pIdGladiateur) {
 				return gladiateur;
 			}
@@ -75,10 +75,10 @@ public class GGladiateur {
 	 * Supprime de la liste des gladiateurs le gladiateur correspondant � l'id
 	 * @param pIdGladiateur
 	 */
-	public void supprimerGladiateur(int pIdGladiateur) {
-		for(Gladiateur gladiateur : this.lesGladiateurs) {
+	public static  void supprimerGladiateur(int pIdGladiateur) {
+		for(Gladiateur gladiateur : tousLesGladiateurs) {
 			if(gladiateur.getIdGladiateur()==pIdGladiateur) {
-				this.lesGladiateurs.remove(gladiateur);
+				tousLesGladiateurs.remove(gladiateur);
 			}
 		}
 	}
@@ -88,8 +88,8 @@ public class GGladiateur {
 	 * Supprime de la liste des gladiateurs le gladiateur passer en parametre
 	 * @param pGladiateur
 	 */
-	public void supprimerGladiateur(Gladiateur pGladiateur) {
-		this.lesGladiateurs.remove(pGladiateur);
+	public static void supprimerGladiateur(Gladiateur pGladiateur) {
+		tousLesGladiateurs.remove(pGladiateur);
 	}
 	
 }

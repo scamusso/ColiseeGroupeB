@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Mirmillon extends Gladiateur {
 	
 	private int poids;
-	private static String cType;
-	private ArrayList<Gladiateur> agresseurs;
+	private static String cType = "Mirmillon";
+	private ArrayList<Gladiateur> mesAgresseurs;
 	
 	/**
 	 * 
@@ -27,22 +27,21 @@ public class Mirmillon extends Gladiateur {
 	public Mirmillon(int idGladiateur, String nomGladiateur, int poids) {
 		super(idGladiateur, nomGladiateur);
 		this.poids = poids;
-		Mirmillon.cType = "Mirmillon";
-		this.agresseurs = new ArrayList<Gladiateur>();
+		this.mesAgresseurs = new ArrayList<Gladiateur>();
 	}
 	
 	
 	/**
 	 * 
 	 * Permet au gladiateur de faire un rapport sur lui meme
-	 * Ajout des agresseurs pour le mirmillon
+	 * Ajout des mesAgresseurs pour le mirmillon
 	 * 
 	 * @return rapport
 	 */
 	
 	public String rapport() {
 		String rapport = super.rapport();
-		rapport = rapport + " " + agresseurs ;
+		rapport = rapport + " " + mesAgresseurs ;
 		return (rapport);
 	}	
 	
@@ -57,7 +56,7 @@ public class Mirmillon extends Gladiateur {
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
 		super.recevoirCoup(agresseur, forceCoup);
-		agresseurs.add(agresseur);
+		mesAgresseurs.add(agresseur);
 
 	}
 	
@@ -72,7 +71,7 @@ public class Mirmillon extends Gladiateur {
 	}
 
 	public ArrayList<modele.Gladiateur> getMesAggresseurs() {
-		return agresseurs;
+		return mesAgresseurs;
 	}
 	
 	public String getType() {
