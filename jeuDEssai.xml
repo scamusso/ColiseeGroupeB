@@ -1,0 +1,100 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+<colisee>
+	<gladiateurs>
+		<gladiateur id="1">
+			<type>retiaire</type>
+			<nom>Unix</nom>
+			<poids/>
+			<agilite>30</agilite>
+			<armes>
+				<arme id="2"/>
+				<arme id="3"/>
+				<arme id="6"/>
+			</armes>
+		</gladiateur>
+		<gladiateur id="2">
+			<type>mirmillon</type>
+			<nom>Informatix</nom>
+			<poids>100</poids>
+			<agilite/>
+			<armes>
+				<arme id="1"/>
+				<arme id="4"/>
+				<arme id="5"/>
+				<arme id="6"/>
+			</armes>
+		</gladiateur>
+		<gladiateur id="3">
+			<type>retiaire</type>
+			<nom>CePlusPlus</nom>
+			<poids/>
+			<agilite>40</agilite>
+			<armes>
+				<arme id="2"/>
+				<arme id="6"/>
+			</armes>
+		</gladiateur>
+		<gladiateur id="4">
+			<type>mirmillon</type>
+			<nom>Pythonus</nom>
+			<poids>60</poids>
+			<agilite/>
+			<armes>
+				<arme id="1"/>
+				<arme id="4"/>
+			</armes>
+		</gladiateur>
+		<gladiateur id="5">
+			<type>retiaire</type>
+			<nom>Szervlet</nom>
+			<poids/>
+			<agilite>50</agilite>
+			<armes>
+				<arme id="1"/>
+				<arme id="6"/>
+			</armes>
+		</gladiateur>
+		<gladiateur id="6">
+			<type>mirmillon</type>
+			<nom>Ramazmjet</nom>
+			<poids>80</poids>
+			<agilite/>
+			<armes>
+				<arme id="4"/>
+				<arme id="5"/>
+			</armes>
+		</gladiateur>
+	</gladiateurs>
+	<armes>
+		<arme id="1">
+			<nom>Glaive</nom>
+			<puissancOffensive>80</puissancOffensive>
+			<puissanceDefensive>0</puissanceDefensive>
+		</arme>
+		<arme id="2">
+			<nom>Trident</nom>
+			<puissancOffensive>100</puissancOffensive>
+			<puissanceDefensive>0</puissanceDefensive>
+		</arme>
+		<arme id="3">
+			<nom>Filet</nom>
+			<puissancOffensive>40</puissancOffensive>
+			<puissanceDefensive>20</puissanceDefensive>
+		</arme>
+		<arme id="4">
+			<nom>Bouclier</nom>
+			<puissancOffensive>40</puissancOffensive>
+			<puissanceDefensive>40</puissanceDefensive>
+		</arme>
+		<arme id="5">
+			<nom>Casque</nom>
+			<puissancOffensive>0</puissancOffensive>
+			<puissanceDefensive>20</puissanceDefensive>
+		</arme>
+		<arme id="6">
+			<nom>Jambière</nom>
+			<puissancOffensive>0</puissancOffensive>
+			<puissanceDefensive>10</puissanceDefensive>
+		</arme>
+	</armes>
+</colisee>
