@@ -13,11 +13,11 @@ import modele.Gladiateur;
  * Controlleur permettant la gestion des �v�nement li�e aux Gladiateurs
  */
 public class Facade {
-	
+
 	// Variable de classe
 	private static GGladiateur gGladiateur;
 	private static GArme gArme;
-	
+
 	/**
 	 * Constructeur
 	 */
@@ -25,9 +25,9 @@ public class Facade {
 		gGladiateur = new GGladiateur();
 		gArme=new GArme();
 	}
-	
-	
-	
+
+
+
 	/**
 	 *  Initialise le jeu d'essai
 	 */
@@ -61,7 +61,7 @@ public class Facade {
 		donnerUneArme(6, 4);
 		donnerUneArme(6, 5);
 	}
-	
+
 	/**
 	 * Creer un Retiaire dans la partie
 	 * @param pNom nom du gladiateur
@@ -71,7 +71,7 @@ public class Facade {
 	public static Gladiateur creerRetiaire(String pNom, int pAgilite) {
 		return gGladiateur.ajouterRetiaire(pNom, pAgilite);
 	}
-	
+
 	/**
 	 * Cr�er un Mirmillon dans la partie
 	 * @param pNom nom du gladiateur
@@ -81,59 +81,73 @@ public class Facade {
 	public static Gladiateur creerMirmillon(String pNom, int pPoids) {
 		return gGladiateur.ajouterMirmillon(pNom, pPoids);
 	}
-	
+
 	/**
 	 * @return la liste des gladiateurs
 	 */
 	public static ArrayList<Gladiateur> listerTousLesGladiateurs () {
 		return gGladiateur.getTousLesGladiateurs();
 	}
-	
+
 	/**
 	 * Retourne la liste des agresseur du gladiateur dont l'id est pass� en param�tre
 	 * @param pIdGladiateur
 	 * @return liste des gladiateurs (objet) 
 	 */
 	public static ArrayList<Gladiateur> listerAgresseurs(int pIdGladiateur) {
-		return gGladiateur.getGladiateur(pIdGladiateur).getMesAggresseurs();	
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			return gGladiateur.getGladiateur(pIdGladiateur).getMesAggresseurs();	
+		}
+		return null;
 	}
-	
+
 	/**
 	 * Renvoie une cha�ne de carract�re
 	 * @param pIdGladiateur
 	 * @return String 
 	 */
 	public static String faireSaluerGladiateur(int pIdGladiateur) {
-		return gGladiateur.getGladiateur(pIdGladiateur).saluer();
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			return gGladiateur.getGladiateur(pIdGladiateur).saluer();
+		}
+		return null;
 	}
-	
+
 	/**
 	 * Retourne le rapport du gladiateur dont l'id est pass� en param�tre
 	 * @param pIdGladiateur
 	 * @return String
 	 */
 	public static String faireRapport(int pIdGladiateur) {
-		return gGladiateur.getGladiateur(pIdGladiateur).rapport();
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			return gGladiateur.getGladiateur(pIdGladiateur).rapport();
+		}
+		return null;
 	}
-	
+
 	/**
 	 * Retourne les armes du gladiateur dont l'id est pass� en param�tre
 	 * @param pIdGladiateur
 	 * @return ArrayList<Arme>
 	 */
 	public static ArrayList<Arme> declarerArmes(int pIdGladiateur) {
-		return gGladiateur.getGladiateur(pIdGladiateur).getMesArmes();
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			return gGladiateur.getGladiateur(pIdGladiateur).getMesArmes();
+		}
+		return null;
 	}
-	
-	
+
+
 	/**
 	 * Supprime le gladiateur dont l'id est pass� en param�tre
 	 * @param pIdGladiateur : int
 	 */
 	public static void supprimerGladiateur(int pIdGladiateur) {
-		gGladiateur.supprimerGladiateur(pIdGladiateur);
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			gGladiateur.supprimerGladiateur(pIdGladiateur);
+		}
 	}
-	
+
 	/**
 	 * Cr�ation d'une nouvelle arme	
 	 * @param pNom : String
@@ -144,35 +158,43 @@ public class Facade {
 	public static Arme creerUneArme(String pNom, int pPuissOff, int pPuissDef) {
 		return gArme.ajouterArme(pNom, pPuissOff, pPuissDef);
 	}
-	
-	
+
+
 	/**
 	 * Affectation d'une arme � un gladiateur
 	 * @param pIdGladiateur : int
 	 * @param pIdArme : int
 	 */
 	public static void donnerUneArme(int pIdGladiateur, int pIdArme) {
-		gGladiateur.getGladiateur(pIdGladiateur).recevoirArme(gArme.getArme(pIdArme));
+		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
+			gGladiateur.getGladiateur(pIdGladiateur).recevoirArme(gArme.getArme(pIdArme));
+		}
 	}
-	
+
 	/**
 	 * Retourne la description d'une arme en fonction de l'id pass� en param�tre
 	 * @param pIdArme
 	 * @return String
 	 */
 	public static String decrireArme(int pIdArme) {
-		return gArme.getArme(pIdArme).description();
+		if (gArme.getArme(pIdArme) !=  null){
+			return gArme.getArme(pIdArme).description();
+		}
+		return null;
 	}
-	
+
 	/**
 	 * Renvoie le nom de l'arme dont l'id est pass� en param�tre
 	 * @param pIdArme
 	 * @return String
 	 */
 	public static String nomArme(int pIdArme) {
-		return gArme.getArme(pIdArme).getNomArme();
+		if (gArme.getArme(pIdArme) !=  null){
+			return gArme.getArme(pIdArme).getNomArme();
+		}
+		return null;
 	}
-	
+
 	/**
 	 * Methode qui permet de lancer l'action frapper
 	 * @param pIdAgresseur : int
@@ -184,5 +206,5 @@ public class Facade {
 			gGladiateur.getGladiateur(pIdAgresseur).frapper(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme));
 		}
 	}
-	
+
 }

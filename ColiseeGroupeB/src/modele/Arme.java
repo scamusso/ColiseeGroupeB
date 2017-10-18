@@ -97,14 +97,23 @@ public class Arme {
 	 * @param puissanceOffensive
 	 */
 	public void setPuissanceOffensive(int puissanceOffensive) {
-		this.puissanceOffensive = puissanceOffensive;
+		if(puissanceOffensive>0){
+			this.puissanceOffensive = puissanceOffensive;
+		} else {
+			System.out.println("puissanceOffensive incorrecte");
+		}
+		
 	}
 	/**
 	 * Met a jour la puissance defensive de l'arme
 	 * @param puissanceDefensive
 	 */
 	public void setPuissanceDefensive(int puissanceDefensive) {
-		this.puissanceDefensive = puissanceDefensive;
+		if(puissanceDefensive>0){
+			this.puissanceDefensive = puissanceDefensive;
+		} else {
+			System.out.println("puissanceDefensive incorrecte");
+		}
 	}
 
 	

@@ -76,11 +76,8 @@ public class GGladiateur {
 	 * @param pIdGladiateur
 	 */
 	public static  void supprimerGladiateur(int pIdGladiateur) {
-		for(Gladiateur gladiateur : tousLesGladiateurs) {
-			if(gladiateur.getIdGladiateur()==pIdGladiateur) {
-				tousLesGladiateurs.remove(gladiateur);
-			}
-		}
+		Gladiateur gladiateur = getGladiateur(pIdGladiateur);
+		tousLesGladiateurs.remove(gladiateur);
 	}
 	
 	

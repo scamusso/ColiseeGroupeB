@@ -11,14 +11,14 @@ import java.util.ArrayList;
  */
 
 public abstract class Gladiateur {
-	
+
 	private static int cVieInitiale = 200;
 	private int idGladiateur ;
 	private String nom;
-	private int vie;
+	private int vie = cVieInitiale;
 	private ArrayList<Arme> mesArmes;
 
-	
+
 	/**
 	 * Constructeur
 	 * 
@@ -29,10 +29,8 @@ public abstract class Gladiateur {
 	 */
 	public Gladiateur(int idGladiateur, String nomGladiateur) {
 		this.idGladiateur  = idGladiateur;
-		this.vie = cVieInitiale;
 		this.nom = nomGladiateur;
 		this.mesArmes = new ArrayList<Arme>();
-		
 	}
 
 
@@ -45,14 +43,16 @@ public abstract class Gladiateur {
 	public String[] declarerMesArmes() {
 		String tableauArmes[] = new String[mesArmes.size()];
 		int compteur = 0;
+		String rapport = "";
 		for (Arme object: mesArmes) {
 			tableauArmes[compteur] = object.description();
-			compteur++;
-			
+			rapport += tableauArmes[compteur];
+			compteur++;	
 		}
+		System.out.println("Voila mes armes : " + rapport);
 		return tableauArmes;
 	}
-	
+
 	/**
 	 * 
 	 * Permet de savoir si le gladiateur est bien portant (c'est a dire que sa vie est a son maximum)
@@ -60,13 +60,9 @@ public abstract class Gladiateur {
 	 * @return
 	 */
 	public boolean estBienPortant() {
-		if (cVieInitiale == this.vie){
-			return true;
-		} else {
-			return false;
-		}		
+		return (cVieInitiale == this.vie);	
 	}
-	
+
 
 	/**
 	 * Permet de savoir si le gladiateur est blessé, c'est a dire vivant mais pas bien portant
@@ -80,7 +76,7 @@ public abstract class Gladiateur {
 			return false;
 		}		
 	}
-	
+
 	/**
 	 * 
 	 * Permet de savoir si le gladiateur est mort
@@ -94,7 +90,7 @@ public abstract class Gladiateur {
 			return false;
 		}	
 	}
-	
+
 	/**
 	 * 
 	 * Permet au gladiateur d'en frapper un autre avec une arme
@@ -103,9 +99,9 @@ public abstract class Gladiateur {
 	 * @param arme
 	 */
 	public void frapper(Gladiateur gladiateur, Arme arme) {
-			gladiateur.recevoirCoup(this, arme.getPuissanceOffensive() + this.getForce());
+		gladiateur.recevoirCoup(this, arme.getPuissanceOffensive() + this.getForce());
 	}
-	
+
 	/**
 	 * 
 	 * Permet au gladiateur de faire un rapport sur lui meme
@@ -115,7 +111,7 @@ public abstract class Gladiateur {
 	public String rapport() {
 		String etatGladiateur;
 		String rapport = "";
-		
+
 		if (estBienPortant()) {
 			etatGladiateur = "Bien portant";
 		} else if (estBlesse()) {
@@ -123,29 +119,29 @@ public abstract class Gladiateur {
 		} else {
 			etatGladiateur = "Moribond";
 		}
-		
+
 		rapport = idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + getForce() + " " + declarerMesArmes();
 		return rapport; 
 	}	
-	
+
 	/**
 	 * Permet d'ajouter une arme a la collection du gladiateur
 	 * 
 	 * @param arme
 	 */
 	public void recevoirArme(Arme arme) {
-        boolean flagArme = false;
-        for (Arme object: mesArmes) {
-            if (object.getNomArme() == arme.getNomArme()) {
-                flagArme = true;
-            }
-        }
-        if (flagArme==false){
-        	mesArmes.add(arme);
-        }
+		boolean flagArme = false;
+		for (Arme object: mesArmes) {
+			if (object.getIdArme() == arme.getIdArme()) {
+				flagArme = true;
+			}
+		}
+		if (flagArme==false){
+			mesArmes.add(arme);
+		}
 
-    }
-	
+	}
+
 	/**
 	 * 
 	 * Permet de descendre la vie du gladiateur en fonction de la force du coup recu
@@ -155,10 +151,10 @@ public abstract class Gladiateur {
 	 * @param forceCoup
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
-		if (agresseur != this){
+		if (agresseur != this && (!estBienPortant() && !estBlesse())){
 			int defArme = 0;
 			for (Arme object: mesArmes) {
-			    defArme = defArme + object.getPuissanceDefensive();
+				defArme = defArme + object.getPuissanceDefensive();
 			}
 			if ((forceCoup - defArme)>0){
 				this.vie = vie - (forceCoup - defArme);
@@ -166,10 +162,9 @@ public abstract class Gladiateur {
 					this.vie = 0;
 				}
 			}
-			
 		}
 	}
-	
+
 	/**
 	 * Permet au gladiateur de saluer / se presenter
 	 * 
@@ -179,50 +174,52 @@ public abstract class Gladiateur {
 		String salutation = "Ave Caesar, " + getType() + " N°" + getIdGladiateur() + " : " + getNom();
 		return salutation;
 	}
-	
-	
+
+
 
 	//Getters
-	
-	public static int getcVieInitiale() {
+
+	public static int getCVieInitiale() {
 		return cVieInitiale;
 	}
-	
+
 	public abstract int getForce();
-	
+
 	public int getIdGladiateur() {
 		return idGladiateur ;
 	}
-	
+
 	public abstract ArrayList<Gladiateur> getMesAggresseurs();
-	
+
 	public ArrayList<Arme> getMesArmes() {
 		return mesArmes;
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public abstract String getType();
 
 	public int getVie() {
 		return vie;
 	}
-	
+
 	//Setters
-	
-	public static void setcVieInitiale(int cVieInitiale) {
+
+	public static void setCVieInitiale(int cVieInitiale) {
 		Gladiateur.cVieInitiale = cVieInitiale;
 	}
 
 	public void setVie(int vie) {
-		this.vie = vie;
+		if (!estBienPortant() && !estBlesse()) {
+			this.vie = vie;
+		}
 	}
-	
+
 	public void setMesArmes(ArrayList<Arme> armes) {
 		this.mesArmes = armes;
 	}
-	
+
 
 }

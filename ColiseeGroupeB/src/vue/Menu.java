@@ -70,7 +70,7 @@ public class Menu {
 				case 4 :
 					for(Gladiateur gladiateur : partie.listerTousLesGladiateurs ()) {
 						System.out.println(gladiateur.saluer());
-						System.out.println(gladiateur.declarerMesArmes());
+						gladiateur.declarerMesArmes();
 					}
 				break;
 				case 5 :
@@ -170,52 +170,7 @@ public class Menu {
 	}
 	
 	
-	/**
-	 * Initialisation du jeu de données
-	 * @return Facade
-	 */
-	public static Facade initDonnee() {
-		
-		Facade partie = new Facade();
-		// créer les gladiateurs
-		partie.creerRetiaire("Unix", 30);
-		partie.creerMirmillon("Infomatix", 100);
-		partie.creerRetiaire("Ceplusplus", 40);
-		partie.creerMirmillon("Pythonus", 60);
-		partie.creerRetiaire("Szervlet", 50);
-		partie.creerMirmillon("Ramazmjet", 80);
-		
-		//Créer les armes
-		partie.creerUneArme("Glaive", 80, 0);
-		partie.creerUneArme("trident", 100, 0);
-		partie.creerUneArme("Filet", 40, 20);
-		partie.creerUneArme("Bouclier", 40, 40);
-		partie.creerUneArme("Casque", 0, 20);
-		partie.creerUneArme("Jambière", 0, 10);
-		
-		
-		partie.donnerUneArme(1, 2);
-		partie.donnerUneArme(1, 6);
-		partie.donnerUneArme(1, 3);
-		
-		partie.donnerUneArme(2, 1);
-		partie.donnerUneArme(2, 4);
-		partie.donnerUneArme(2, 5);
-		partie.donnerUneArme(2, 6);
-		
-		partie.donnerUneArme(3, 2);
-		partie.donnerUneArme(3, 6);
-		
-		partie.donnerUneArme(4, 1);
-		partie.donnerUneArme(4, 4);
-		
-		partie.donnerUneArme(5, 1);
-		partie.donnerUneArme(5, 6);
-		
-		partie.donnerUneArme(6, 4);
-		partie.donnerUneArme(6, 5);
-		return partie;
-	}
+
 	
 	
 	

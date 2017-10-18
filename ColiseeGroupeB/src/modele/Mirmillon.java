@@ -27,7 +27,7 @@ public class Mirmillon extends Gladiateur {
 	public Mirmillon(int idGladiateur, String nomGladiateur, int poids) {
 		super(idGladiateur, nomGladiateur);
 		this.poids = poids;
-		this.mesAgresseurs = new ArrayList<Gladiateur>();
+		this.setMesAgresseurs(new ArrayList<Gladiateur>());
 	}
 	
 	
@@ -41,7 +41,7 @@ public class Mirmillon extends Gladiateur {
 	
 	public String rapport() {
 		String rapport = super.rapport();
-		rapport = rapport + " " + mesAgresseurs ;
+		rapport = rapport + " " + getMesAgresseurs() ;
 		return (rapport);
 	}	
 	
@@ -56,7 +56,7 @@ public class Mirmillon extends Gladiateur {
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
 		super.recevoirCoup(agresseur, forceCoup);
-		mesAgresseurs.add(agresseur);
+		getMesAgresseurs().add(agresseur);
 
 	}
 	
@@ -80,8 +80,18 @@ public class Mirmillon extends Gladiateur {
 
 	//Setters
 	
-	public void setCType() {
-		Mirmillon.cType = "Mirmillon";
+	public static void setCType(String cType) {
+		Mirmillon.cType = cType;
+	}
+
+
+	public ArrayList<Gladiateur> getMesAgresseurs() {
+		return mesAgresseurs;
+	}
+
+
+	public void setMesAgresseurs(ArrayList<Gladiateur> mesAgresseurs) {
+		this.mesAgresseurs = mesAgresseurs;
 	}
 
 }

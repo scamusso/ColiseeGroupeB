@@ -15,7 +15,6 @@ public class Retiaire extends Gladiateur  {
 	private static int cForce = 30;
 	private static String cType = "Retiaire";
 	private int agilite;
-	private ArrayList<Gladiateur> agresseurs;
 	
 	/**
 	 * 
@@ -28,7 +27,6 @@ public class Retiaire extends Gladiateur  {
 	public Retiaire(int idGladiateur, String nomGladiateur, int agilite) {
 		super(idGladiateur, nomGladiateur);
 		this.setAgilite(agilite);
-		this.setAgresseurs(new ArrayList<Gladiateur>()); 
 	}
 	
 	/**
@@ -41,19 +39,7 @@ public class Retiaire extends Gladiateur  {
 	 * @param forceCoup
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
-		if (agresseur != this){
-			int defArme = 0;
-			for (Arme object: getMesArmes()) {
-			    defArme = defArme + object.getPuissanceDefensive();
-			}
-			if ((forceCoup - defArme  - this.agilite)>0){
-				this.setVie(this.getVie() - (forceCoup - defArme - this.agilite));
-				if (this.getVie()<0){
-					this.setVie(0);
-				}
-			}
-			
-		}
+		super.recevoirCoup(agresseur, forceCoup);
 	}
 	
 	/**
@@ -86,9 +72,6 @@ public class Retiaire extends Gladiateur  {
 		return cType;
 	}
 	
-	public ArrayList<modele.Gladiateur> getMesAggresseurs() {
-		return agresseurs;
-	}
 	
 	//Setters
 	
@@ -96,33 +79,32 @@ public class Retiaire extends Gladiateur  {
 		Retiaire.cType = "Retiaire";
 	}
 	
-	private static int getcForce() {
+	private static int getCForce() {
 		return cForce;
 	}
 
-	private static void setcForce(int cForce) {
+	private static void setCForce(int cForce) {
 		Retiaire.cForce = cForce;
 	}
 
-	private static String getcType() {
+	private static String getCType() {
 		return cType;
 	}
 
-	private static void setcType(String cType) {
+	private static void setCType(String cType) {
 		Retiaire.cType = cType;
 	}
 
-	private ArrayList<Gladiateur> getAgresseurs() {
-		return agresseurs;
-	}
-
-	private void setAgresseurs(ArrayList<Gladiateur> agresseurs) {
-		this.agresseurs = agresseurs;
-	}
 
 	private void setAgilite(int agilite) {
 		this.agilite = agilite;
 	}
+
+	@Override
+	public ArrayList<Gladiateur> getMesAggresseurs() {
+		return null;
+	}
+
 
 	
 
