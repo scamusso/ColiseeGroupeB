@@ -10,7 +10,7 @@ import modele.Gladiateur;
 
 /**
  * @author clement
- * Controlleur permettant la gestion des �v�nement li�e aux Gladiateurs
+ * Controleur permettant la gestion des �v�nement li�e aux Gladiateurs
  */
 public class Facade {
 
