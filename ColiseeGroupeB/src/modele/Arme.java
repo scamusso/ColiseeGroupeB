@@ -60,7 +60,7 @@ public class Arme {
 	 */
 	public String description(){
 		
-		return "ID arme : " + this.getIdArme() + ", Nom de l'arme : " + this.getNomArme() + ", Puissance offensive : " + this.getPuissanceOffensive() + ", Puissance défensive : " + this.getPuissanceDefensive() + ". ";	
+		return ("ID arme : " + this.getIdArme() + ", Nom de l'arme : " + this.getNomArme() + ", Puissance offensive : " + this.getPuissanceOffensive() + ", Puissance défensive : " + this.getPuissanceDefensive() + ". ").toString();	
 	}
 	/**
 	 * Retourne le nom de l'arme

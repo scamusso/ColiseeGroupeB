@@ -54,7 +54,6 @@ public abstract class Gladiateur {
 			rapport += tableauArmes[compteur];
 			compteur++;	
 		}
-		//System.out.println("Voila mes armes : " + rapport);
 		return tableauArmes;
 	}
 
@@ -117,7 +116,7 @@ public abstract class Gladiateur {
 			etatGladiateur = "Moribond";
 		}
 
-		return idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + this.getForce() + " " + declarerMesArmes();
+		return idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + this.getForce() + " " + String.join(" ",declarerMesArmes());
 	}	
 
 	/**
