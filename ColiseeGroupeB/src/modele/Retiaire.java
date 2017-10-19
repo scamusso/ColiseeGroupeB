@@ -2,6 +2,8 @@ package modele;
 
 import java.util.ArrayList;
 
+import modele.Exception.ExceptionRetiaire;
+
 /**
  * Retiaire est la classe représentante un gladiateur de type retiaire dans le colysée.
  * 
@@ -24,8 +26,11 @@ public class Retiaire extends Gladiateur  {
 	 * @param nomGladiateur
 	 * @param agilite
 	 */
-	public Retiaire(int idGladiateur, String nomGladiateur, int agilite) {
+	public Retiaire(int idGladiateur, String nomGladiateur, int agilite) throws Exception{
 		super(idGladiateur, nomGladiateur);
+		if(agilite <0)  {
+			throw new ExceptionRetiaire("L'agilité d'un Rétiaire ne peut pas être négative !");			
+		}
 		this.setAgilite(agilite);
 	}
 	
@@ -38,7 +43,7 @@ public class Retiaire extends Gladiateur  {
 	 * @param agresseur
 	 * @param forceCoup
 	 */
-	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
+	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception {
 		super.recevoirCoup(agresseur, forceCoup);
 	}
 	
@@ -51,52 +56,52 @@ public class Retiaire extends Gladiateur  {
 	 */
 	
 	public String rapport() {
-		String rapport = super.rapport();
-		int attribuType;
-		attribuType = this.getAgilite() ;
-		rapport = rapport + " " + attribuType ;
-		return (rapport);
+		return super.rapport() + " " + this.getAgilite();
 	}	
 	
 	//Getters
 	
 	public int getAgilite() {
-		return agilite;
+		return this.agilite;
 	}
 
 	public int getForce() {
-		return cForce ;
+		return Retiaire.cForce ;
 	}
 
 	public String getType() {
-		return cType;
+		return Retiaire.cType;
 	}
 	
 	
-	//Setters
-	
-	private void setCType() {
-		Retiaire.cType = "Retiaire";
-	}
-	
+	//Setters	
 	private static int getCForce() {
-		return cForce;
+		return Retiaire.cForce;
 	}
 
-	private static void setCForce(int cForce) {
+	private static void setCForce(int cForce) throws Exception {
+		if(cForce < 0) {
+			throw new ExceptionRetiaire("La force d'un Retiaire ne peut pas être négative");
+		}
 		Retiaire.cForce = cForce;
 	}
 
 	private static String getCType() {
-		return cType;
+		return Retiaire.cType;
 	}
 
-	private static void setCType(String cType) {
+	private static void setCType(String cType) throws Exception {
+		if(cType.isEmpty() || cType == null) {
+			throw new ExceptionRetiaire("Le type d'un Retiaire ne peut pas être vide");
+		}
 		Retiaire.cType = cType;
 	}
 
 
-	private void setAgilite(int agilite) {
+	private void setAgilite(int agilite) throws Exception {
+		if(agilite < 0) {
+			throw new ExceptionRetiaire("L'agilite d'un Retiare ne peut pas être négative");
+		}
 		this.agilite = agilite;
 	}
 
@@ -104,10 +109,5 @@ public class Retiaire extends Gladiateur  {
 	public ArrayList<Gladiateur> getMesAggresseurs() {
 		return null;
 	}
-
-
-	
-
-
 
 }

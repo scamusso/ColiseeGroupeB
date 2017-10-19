@@ -68,8 +68,9 @@ public class Facade {
 	 * @param pNom nom du gladiateur
 	 * @param pAgilite agilit� du gladiateur
 	 * @return le gladiateur cr�er
+	 * @throws Exception 
 	 */
-	public static Gladiateur creerRetiaire(String pNom, int pAgilite) {
+	public static Gladiateur creerRetiaire(String pNom, int pAgilite) throws Exception {
 		return gGladiateur.ajouterRetiaire(pNom, pAgilite);
 	}
 
@@ -78,8 +79,9 @@ public class Facade {
 	 * @param pNom nom du gladiateur
 	 * @param pAgilite agilit� du gladiateur
 	 * @return le gladiateur cr�er
+	 * @throws Exception 
 	 */
-	public static Gladiateur creerMirmillon(String pNom, int pPoids) {
+	public static Gladiateur creerMirmillon(String pNom, int pPoids) throws Exception {
 		return gGladiateur.ajouterMirmillon(pNom, pPoids);
 	}
 
@@ -166,8 +168,9 @@ public class Facade {
 	 * Affectation d'une arme � un gladiateur
 	 * @param pIdGladiateur : int
 	 * @param pIdArme : int
+	 * @throws Exception 
 	 */
-	public static void donnerUneArme(int pIdGladiateur, int pIdArme) {
+	public static void donnerUneArme(int pIdGladiateur, int pIdArme) throws Exception {
 		if (gGladiateur.getGladiateur(pIdGladiateur) !=  null){
 			gGladiateur.getGladiateur(pIdGladiateur).recevoirArme(gArme.getArme(pIdArme));
 		}
@@ -202,8 +205,9 @@ public class Facade {
 	 * @param pIdAgresseur : int
 	 * @param pIdVictime : int
 	 * @param pIdArme: int
+	 * @throws Exception 
 	 */
-	public static void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) {
+	public static void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) throws Exception {
 		if(!gGladiateur.getGladiateur(pIdAgresseur).estMoribond() && ! gGladiateur.getGladiateur(pIdVictime).estMoribond()) {
 			gGladiateur.getGladiateur(pIdAgresseur).frapper(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme));
 		}

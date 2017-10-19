@@ -32,8 +32,9 @@ public class GGladiateur {
 	 * @param pNom nom du gladiateur
 	 * @param pPoids son poids
 	 * @return l'objet gladiateur cr�er
+	 * @throws Exception 
 	 */
-	public static Gladiateur ajouterMirmillon(String pNom, int pPoids) {
+	public static Gladiateur ajouterMirmillon(String pNom, int pPoids) throws Exception {
 		tousLesGladiateurs.add(new Mirmillon(GGladiateur.nextIdGladiateur++,pNom,pPoids));
 		return tousLesGladiateurs.get(tousLesGladiateurs.size()-1);
 	}
@@ -43,8 +44,9 @@ public class GGladiateur {
 	 * @param pNom nom du gladiateur
 	 * @param pAgilite son agilit�
 	 * @return l'objet gladiateur cr�er
+	 * @throws Exception 
 	 */
-	public static Gladiateur ajouterRetiaire(String pNom, int pAgilite) {
+	public static Gladiateur ajouterRetiaire(String pNom, int pAgilite) throws Exception {
 		tousLesGladiateurs.add(new Retiaire(GGladiateur.nextIdGladiateur++,pNom,pAgilite));
 		return tousLesGladiateurs.get(tousLesGladiateurs.size()-1);
 	}

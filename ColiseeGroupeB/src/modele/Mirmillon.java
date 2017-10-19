@@ -2,10 +2,13 @@ package modele;
 
 import java.util.ArrayList;
 
+import modele.Exception.ExceptionMirmillon;
+
 /**
  * Mirmillon est la classe représentante un gladiateur de type mirmillon dans le colysée.
  * 
  * @author Stephane CAMUSSO
+ * @version 2.0
  * 
  */
 
@@ -23,10 +26,11 @@ public class Mirmillon extends Gladiateur {
 	 * @param idGladiateur
 	 * @param nomGladiateur
 	 * @param agilite
+	 * @throws Exception 
 	 */
-	public Mirmillon(int idGladiateur, String nomGladiateur, int poids) {
+	public Mirmillon(int idGladiateur, String nomGladiateur, int poids) throws Exception {
 		super(idGladiateur, nomGladiateur);
-		this.poids = poids;
+		this.setPoids(poids);
 		this.setMesAgresseurs(new ArrayList<Gladiateur>());
 	}
 	
@@ -40,9 +44,7 @@ public class Mirmillon extends Gladiateur {
 	 */
 	
 	public String rapport() {
-		String rapport = super.rapport();
-		rapport = rapport + " " + getMesAgresseurs() ;
-		return (rapport);
+		return super.rapport() + " " + getMesAgresseurs() ;
 	}	
 	
 	/**
@@ -54,44 +56,63 @@ public class Mirmillon extends Gladiateur {
 	 * @param agresseur
 	 * @param forceCoup
 	 */
-	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
+	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception{
 		super.recevoirCoup(agresseur, forceCoup);
-		getMesAgresseurs().add(agresseur);
-
+		this.addAgresseurs(agresseur);
 	}
 	
+	private void addAgresseurs(Gladiateur pAgresseur) throws Exception {
+		if(pAgresseur == null) {
+			throw new ExceptionMirmillon("Retiaire ne peut avoir d'agresseur NULL");
+		}
+		this.mesAgresseurs.add(pAgresseur);
+	}
 	//Getters
 
 	public int getPoids() {
-		return poids;
+		return this.poids;
 	}
 
 	public int getForce() {
-		return poids/2;
+		return this.poids/2;
 	}
 
 	public ArrayList<modele.Gladiateur> getMesAggresseurs() {
-		return mesAgresseurs;
+		return this.mesAgresseurs;
 	}
 	
 	public String getType() {
-		return cType;
+		return Mirmillon.cType;
 	}
 
 	//Setters
 	
-	public static void setCType(String cType) {
+	public static void setCType(String cType) throws Exception {
+		if(cType.isEmpty() || cType == null) {
+			throw new ExceptionMirmillon("Le type du mirmillon ne peut pas être vide");
+		}
 		Mirmillon.cType = cType;
 	}
 
 
-	public ArrayList<Gladiateur> getMesAgresseurs() {
-		return mesAgresseurs;
+	public ArrayList<modele.Gladiateur> getMesAgresseurs() {
+		return this.mesAgresseurs;
 	}
 
 
-	public void setMesAgresseurs(ArrayList<Gladiateur> mesAgresseurs) {
+	public void setMesAgresseurs(ArrayList<modele.Gladiateur> mesAgresseurs) throws Exception {
+		if(mesAgresseurs == null) {
+			throw new ExceptionMirmillon("La liste des agresseur du Mirmillon ne peut être NULL");
+		}
 		this.mesAgresseurs = mesAgresseurs;
+	}
+
+
+	private void setPoids(int poids) throws Exception {
+		if(poids <= 0) {
+			throw new ExceptionMirmillon("Le poid d'un Mirmillon ne peut être inférieur ou égal à 0");
+		}
+		this.poids = poids;
 	}
 
 }

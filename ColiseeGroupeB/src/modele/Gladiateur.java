@@ -2,11 +2,15 @@ package modele;
 
 import java.util.ArrayList;
 
+import modele.Exception.ExceptionGladiateur;
+
 
 /**
  * Gladiateur est la classe représentante un gladiateur dans le colysée.
  * 
  * @author Stephane CAMUSSO
+ * @version 2.0
+ * MAJ le 19/10/2017
  * 
  */
 
@@ -24,13 +28,14 @@ public abstract class Gladiateur {
 	 * 
 	 * @param idGladiateur
 	 * @param nomGladiateur
+	 * @throws Exception 
 	 * 
 	 * 
 	 */
-	public Gladiateur(int idGladiateur, String nomGladiateur) {
-		this.idGladiateur  = idGladiateur;
-		this.nom = nomGladiateur;
-		this.mesArmes = new ArrayList<Arme>();
+	public Gladiateur(int idGladiateur, String nomGladiateur) throws Exception {
+		this.setIdGladiateur(idGladiateur);
+		this.setNom(nomGladiateur);
+		this.setMesArmes(new ArrayList<Arme>());
 	}
 
 
@@ -38,7 +43,7 @@ public abstract class Gladiateur {
 	 * 
 	 * Permet d'afficher les armes du gladiateur
 	 * 
-	 * @return
+	 * @return tableauArmes String[]
 	 */
 	public String[] declarerMesArmes() {
 		String tableauArmes[] = new String[mesArmes.size()];
@@ -57,7 +62,7 @@ public abstract class Gladiateur {
 	 * 
 	 * Permet de savoir si le gladiateur est bien portant (c'est a dire que sa vie est a son maximum)
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean estBienPortant() {
 		return (cVieInitiale == this.vie);	
@@ -70,11 +75,7 @@ public abstract class Gladiateur {
 	 * @return
 	 */
 	public boolean estBlesse() {
-		if (this.vie < cVieInitiale && this.vie!=0){
-			return true;
-		} else {
-			return false;
-		}		
+		return (this.getVie() < cVieInitiale && this.getVie()!=0);
 	}
 
 	/**
@@ -84,11 +85,7 @@ public abstract class Gladiateur {
 	 * @return
 	 */
 	public boolean estMoribond() {
-		if (this.vie==0){
-			return true;
-		} else {
-			return false;
-		}	
+		return (this.getVie() == 0);
 	}
 
 	/**
@@ -97,8 +94,9 @@ public abstract class Gladiateur {
 	 * 
 	 * @param gladiateur
 	 * @param arme
+	 * @throws Exception 
 	 */
-	public void frapper(Gladiateur gladiateur, Arme arme) {
+	public void frapper(Gladiateur gladiateur, Arme arme) throws Exception {
 		gladiateur.recevoirCoup(this, arme.getPuissanceOffensive() + this.getForce());
 	}
 
@@ -106,11 +104,10 @@ public abstract class Gladiateur {
 	 * 
 	 * Permet au gladiateur de faire un rapport sur lui meme
 	 * 
-	 * @return rapport
+	 * @return rapport String
 	 */
 	public String rapport() {
 		String etatGladiateur;
-		String rapport = "";
 
 		if (estBienPortant()) {
 			etatGladiateur = "Bien portant";
@@ -120,8 +117,7 @@ public abstract class Gladiateur {
 			etatGladiateur = "Moribond";
 		}
 
-		rapport = idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + getForce() + " " + declarerMesArmes();
-		return rapport; 
+		return idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + this.getForce() + " " + declarerMesArmes();
 	}	
 
 	/**
@@ -129,17 +125,16 @@ public abstract class Gladiateur {
 	 * 
 	 * @param arme
 	 */
-	public void recevoirArme(Arme arme) {
-		boolean flagArme = false;
+	public void recevoirArme(Arme arme) throws Exception {
+		if(arme == null) {
+			throw new ExceptionGladiateur("Un gladiateur ne peut recevoir une arme null");
+		}
 		for (Arme object: mesArmes) {
 			if (object.getIdArme() == arme.getIdArme()) {
-				flagArme = true;
+				return;
 			}
 		}
-		if (flagArme==false){
 			mesArmes.add(arme);
-		}
-
 	}
 
 	/**
@@ -150,16 +145,18 @@ public abstract class Gladiateur {
 	 * @param agresseur
 	 * @param forceCoup
 	 */
-	public void recevoirCoup(Gladiateur agresseur, int forceCoup) {
+	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception{
+		if(agresseur == null || forceCoup < 0) {
+			throw new ExceptionGladiateur("Un Gladiateur ne peut recevoir un coup avec une Force négative ou recevoir un coup d'un Gladiateur inexistant");
+		}
 		if (agresseur != this && (!estBienPortant() && !estBlesse())){
 			int defArme = 0;
 			for (Arme object: mesArmes) {
-				defArme = defArme + object.getPuissanceDefensive();
+				defArme += object.getPuissanceDefensive();
 			}
 			if ((forceCoup - defArme)>0){
-				this.vie = vie - (forceCoup - defArme);
-				if (this.vie<0){
-					this.vie = 0;
+				if (this.getVie() - (forceCoup - defArme) <0){
+					this.setVie(0);
 				}
 			}
 		}
@@ -168,11 +165,10 @@ public abstract class Gladiateur {
 	/**
 	 * Permet au gladiateur de saluer / se presenter
 	 * 
-	 * @return
+	 * @return salutation
 	 */
 	public String saluer() {
-		String salutation = "Ave Caesar, " + this.getType() + " N°" + this.getIdGladiateur() + " : " + this.getNom();
-		return salutation;
+		return "Ave Caesar, " + this.getType() + " N°" + this.getIdGladiateur() + " : " + this.getNom();
 	}
 
 
@@ -180,49 +176,67 @@ public abstract class Gladiateur {
 	//Getters
 
 	public static int getCVieInitiale() {
-		return cVieInitiale;
+		return Gladiateur.cVieInitiale;
 	}
 
 	public abstract int getForce();
 
 	public int getIdGladiateur() {
-		return idGladiateur ;
+		return this.idGladiateur ;
 	}
 
 	public abstract ArrayList<Gladiateur> getMesAggresseurs();
 
 	public ArrayList<Arme> getMesArmes() {
-		return mesArmes;
+		return this.mesArmes;
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public abstract String getType();
 
 	public int getVie() {
-		return vie;
+		return this.vie;
 	}
 
 	//Setters
 
-	public static void setCVieInitiale(int cVieInitiale) {
+	public static void setCVieInitiale(int cVieInitiale) throws Exception {
+		if(cVieInitiale <= 0) {
+			throw new ExceptionGladiateur("La vie initial d'un Gladiateur ne peut inférieur ou égal à 0");
+		}
 		Gladiateur.cVieInitiale = cVieInitiale;
 	}
 
 	public void setVie(int vie) throws Exception {
 		if(vie < 0) {
-			throw new Exception("La vie d'un gladiateur ne peut pas être inférieur à 0");
+			throw new ExceptionGladiateur("La vie d'un gladiateur ne peut pas être inférieur à 0");
 		}
-		this.vie = vie;
+		this.setVie(vie);
 	}
 
 	public void setMesArmes(ArrayList<Arme> armes) throws Exception {
 		if(armes == null) {
-			throw new Exception("Unexpected Weapon's");
+			throw new ExceptionGladiateur("Unexpected Weapon's");
 		}
 		this.mesArmes = armes;
+	}
+	
+	private void setIdGladiateur(int idGladiateur) throws Exception {
+		if(idGladiateur < 0) {
+			throw new ExceptionGladiateur("L'id d'un Gladiateur ne peut pas être négatif");
+		}
+		this.idGladiateur = idGladiateur;
+	}
+
+
+	private void setNom(String nom) throws Exception {
+		if(nom.isEmpty() || nom == null) {
+			throw new ExceptionGladiateur("Le nom d'un gladiateur ne peut être vide");
+		}
+		this.nom = nom;
 	}
 
 
