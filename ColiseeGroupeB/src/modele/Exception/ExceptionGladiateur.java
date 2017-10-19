@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/**
- * 
- */
 package modele.Exception;
 
 /**
@@ -9,16 +5,8 @@ package modele.Exception;
  * @version 2.0
  *
  */
-=======
-package modele.Exception;
-
->>>>>>> clement
 public class ExceptionGladiateur extends Exception {
 	public ExceptionGladiateur(String pMessage) {
 		super(pMessage);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> clement
 }
