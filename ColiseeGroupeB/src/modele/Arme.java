@@ -99,8 +99,8 @@ public class Arme {
 	 * @param puissanceOffensive
 	 */
 	public void setPuissanceOffensive(int puissanceOffensive) throws Exception {
-		if(puissanceOffensive<=0){
-			throw new ExceptionArme("La puissance offensive d'une arme ne peut être inférieur ou égal à 0");
+		if(puissanceOffensive<0){
+			throw new ExceptionArme("La puissance offensive d'une arme ne peut être inférieur à 0");
 		}
 		this.puissanceOffensive = puissanceOffensive;
 	}
