@@ -30,8 +30,9 @@ public class Facade {
 
 	/**
 	 *  Initialise le jeu d'essai
+	 * @throws Exception 
 	 */
-	public static void lancerJeuDEssai() {
+	public static void lancerJeuDEssai() throws Exception {
 		creerRetiaire("Unix", 30);
 		creerMirmillon("Infomatix", 100);
 		creerRetiaire("Ceplusplus", 40);
@@ -154,8 +155,9 @@ public class Facade {
 	 * @param pPuissOff : int
 	 * @param pPuissDef : int
 	 * @return Arme
+	 * @throws Exception 
 	 */
-	public static Arme creerUneArme(String pNom, int pPuissOff, int pPuissDef) {
+	public static Arme creerUneArme(String pNom, int pPuissOff, int pPuissDef) throws Exception {
 		return gArme.ajouterArme(pNom, pPuissOff, pPuissDef);
 	}
 

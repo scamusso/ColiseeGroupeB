@@ -171,7 +171,7 @@ public abstract class Gladiateur {
 	 * @return
 	 */
 	public String saluer() {
-		String salutation = "Ave Caesar, " + getType() + " N°" + getIdGladiateur() + " : " + getNom();
+		String salutation = "Ave Caesar, " + this.getType() + " N°" + this.getIdGladiateur() + " : " + this.getNom();
 		return salutation;
 	}
 
@@ -211,13 +211,17 @@ public abstract class Gladiateur {
 		Gladiateur.cVieInitiale = cVieInitiale;
 	}
 
-	public void setVie(int vie) {
-		if (!estBienPortant() && !estBlesse()) {
-			this.vie = vie;
+	public void setVie(int vie) throws Exception {
+		if(vie < 0) {
+			throw new Exception("La vie d'un gladiateur ne peut pas être inférieur à 0");
 		}
+		this.vie = vie;
 	}
 
-	public void setMesArmes(ArrayList<Arme> armes) {
+	public void setMesArmes(ArrayList<Arme> armes) throws Exception {
+		if(armes == null) {
+			throw new Exception("Unexpected Weapon's");
+		}
 		this.mesArmes = armes;
 	}
 

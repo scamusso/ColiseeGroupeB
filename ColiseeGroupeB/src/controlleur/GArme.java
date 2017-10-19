@@ -33,7 +33,7 @@ public class GArme {
 	 * @param puissDef
 	 * @return arme
 	 */
-	public static Arme ajouterArme(String nomArme, int puissOff, int puissDef) {
+	public static Arme ajouterArme(String nomArme, int puissOff, int puissDef) throws Exception {
 		toutesLesArmes.add(new Arme(nextIdArme++, nomArme, puissOff, puissDef));		
 		return toutesLesArmes.get(toutesLesArmes.size()-1);
 	}
