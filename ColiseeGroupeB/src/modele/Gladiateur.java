@@ -54,7 +54,7 @@ public abstract class Gladiateur {
 			rapport += tableauArmes[compteur];
 			compteur++;	
 		}
-		System.out.println("Voila mes armes : " + rapport);
+		//System.out.println("Voila mes armes : " + rapport);
 		return tableauArmes;
 	}
 

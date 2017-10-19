@@ -44,7 +44,7 @@ public class Mirmillon extends Gladiateur {
 	 */
 	
 	public String rapport() {
-		return super.rapport() + " " + getMesAgresseurs() ;
+		return super.rapport() + " " + getMesAggresseurs() ;
 	}	
 	
 	/**
@@ -77,7 +77,7 @@ public class Mirmillon extends Gladiateur {
 		return this.poids/2;
 	}
 
-	public ArrayList<modele.Gladiateur> getMesAggresseurs() {
+	public ArrayList<Gladiateur> getMesAggresseurs() {
 		return this.mesAgresseurs;
 	}
 	
@@ -93,12 +93,6 @@ public class Mirmillon extends Gladiateur {
 		}
 		Mirmillon.cType = cType;
 	}
-
-
-	public ArrayList<modele.Gladiateur> getMesAgresseurs() {
-		return this.mesAgresseurs;
-	}
-
 
 	public void setMesAgresseurs(ArrayList<modele.Gladiateur> mesAgresseurs) throws Exception {
 		if(mesAgresseurs == null) {
