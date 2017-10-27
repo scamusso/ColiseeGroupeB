@@ -86,6 +86,33 @@ public abstract class Gladiateur {
 	public boolean estMoribond() {
 		return (this.getVie() == 0);
 	}
+	
+	/**
+	 * Message prononce par le gladiateur porteur d'un coup
+	 * @param gladiateur Gladiateur qui recoit le coup
+	 * @param arme utilisee par l'agresseur pour porter le coup
+	 * 
+	 */
+	public String messageAgresseur(Gladiateur gladiateur, Arme arme) throws Exception {
+		return getNom()+" frappe "+gladiateur.getNom()+" avec un(e) "+ arme.getNomArme()+" d'un coup de puissance "+ (arme.getPuissanceOffensive() + this.getForce());
+	}
+	
+	/**
+	 * Message prononce par le gladiateur victime d'un coup
+	 * @param agresseur Gladiateur porteur du coup
+	 * @param arme utilisee par l'agresseur pour porter le coup
+	 */
+	public String messageVictime(Gladiateur agresseur, Arme arme) throws Exception {
+		int defArme = 0;
+		for (Arme object: mesArmes) {
+			defArme += object.getPuissanceDefensive();
+		}
+		if ((agresseur.getForce() + arme.getPuissanceOffensive() - defArme)>0){
+			return getNom() +" tué par "+ agresseur.getNom()+" causant "+((agresseur.getForce()+arme.getPuissanceOffensive()) - defArme)+" dégats";
+		}else{
+			return getNom() +" touché par "+ agresseur.getNom()+" causant "+(agresseur.getForce() + arme.getPuissanceOffensive() - defArme)+" dégats";
+		}
+	}
 
 	/**
 	 * 
@@ -96,7 +123,10 @@ public abstract class Gladiateur {
 	 * @throws Exception 
 	 */
 	public void frapper(Gladiateur gladiateur, Arme arme) throws Exception {
+		//System.out.println(getNom()+" frappe "+gladiateur.getNom()+" avec un(e) "+ arme.getNomArme()+" d'un coup de puissance "+ (arme.getPuissanceOffensive() + this.getForce()));
+		
 		gladiateur.recevoirCoup(this, arme.getPuissanceOffensive() + this.getForce());
+		
 	}
 
 	/**
@@ -148,7 +178,7 @@ public abstract class Gladiateur {
 		if(agresseur == null || forceCoup < 0) {
 			throw new ExceptionGladiateur("Un Gladiateur ne peut recevoir un coup avec une Force nÃ©gative ou recevoir un coup d'un Gladiateur inexistant");
 		}
-		if (agresseur != this && (!estBienPortant() && !estBlesse())){
+		if (agresseur != this && (!estMoribond())){
 			int defArme = 0;
 			for (Arme object: mesArmes) {
 				defArme += object.getPuissanceDefensive();
@@ -156,6 +186,8 @@ public abstract class Gladiateur {
 			if ((forceCoup - defArme)>0){
 				if (this.getVie() - (forceCoup - defArme) <0){
 					this.setVie(0);
+				}else{
+					this.setVie(this.getVie() - (forceCoup - defArme));
 				}
 			}
 		}
@@ -213,7 +245,7 @@ public abstract class Gladiateur {
 		if(vie < 0) {
 			throw new ExceptionGladiateur("La vie d'un gladiateur ne peut pas Ãªtre infÃ©rieur Ã  0");
 		}
-		this.setVie(vie);
+		this.vie = vie;
 	}
 
 	public void setMesArmes(ArrayList<Arme> armes) throws Exception {

@@ -39,6 +39,19 @@ public class GArme {
 	}
 	
 	/**
+	 * Ajouter une nouvelle arme
+	 * @param idArme
+	 * @param nomArme
+	 * @param puissOff
+	 * @param puissDef
+	 * @return arme
+	 */
+	public static Arme ajouterArme(int idArme, String nomArme, int puissOff, int puissDef) throws Exception {
+		toutesLesArmes.add(new Arme(idArme, nomArme, puissOff, puissDef));		
+		return toutesLesArmes.get(toutesLesArmes.size()-1);
+	}
+	
+	/**
 	 * Recupere une arme par son id dans la liste des armes creees
 	 * @param idArme
 	 * @return

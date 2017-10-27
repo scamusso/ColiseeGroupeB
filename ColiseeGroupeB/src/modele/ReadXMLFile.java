@@ -1,7 +1,9 @@
 package modele;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,78 +15,63 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import controlleur.Facade;
+import controlleur.GArme;
+import controlleur.GGladiateur;
+
 public class ReadXMLFile {
-    public static void main(final String[] args) {
+	
+	private static ArrayList<Gladiateur> gladiateursDuFichier;
+	private static ArrayList<Arme> armesDuFichier;
+	 
+	
+    public ReadXMLFile(String filepath) throws Exception {
         /*
-         * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+         * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
          */
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             	
 	        try {
 	            /*
-	             * Etape 2 : création d'un parseur
+	             * Etape 2 : creation d'un parseur
 	             */
 	            final DocumentBuilder builder = factory.newDocumentBuilder();
 				
 		    /*
-		     * Etape 3 : création d'un Document
+		     * Etape 3 : creation d'un Document
 		     */
-		    final Document document= builder.parse(new File("jeuDEssai.xml"));
-				
+		    final Document document= builder.parse(new File(filepath));
+		   
 						
 		    /*
-		     * Etape 4 : récupération de l'Element racine
+		     * Etape 4 : recuperation de l'Element racine
 		     */
 		    final Element racine = document.getDocumentElement();
 			
-		    //Affichage de l'élément racine
-		    System.out.println("\n*************RACINE************");
-		    System.out.println(racine.getNodeName());
-			
 		    /*
-		     * Etape 5 : récupération des personnes
+		     * Etape 5 : recuperation des personnes
 		     */
 		    final NodeList racineNoeuds = racine.getChildNodes();
 		    final int nbRacineNoeuds = racineNoeuds.getLength();
+		    
+		    
 				
-		    for (int i = 0; i<nbRacineNoeuds; i++) {
+		    for (int i = nbRacineNoeuds-1; i>=0; i--) {
+		    	
 		        if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
-		            final Element gladiateurs = (Element) racineNoeuds.item(i);
-					
-				    	 /*
-					     * Etape 6 : récupération du nom et du prénom
-					     */
-			    
-					    final Element gladiateur = (Element) gladiateurs.getElementsByTagName("gladiateur").item(0);
-					    //final Element armedugladiateur = (Element) gladiateur.getElementsByTagName("arme");
-					    NodeList armedugladiateur = gladiateur.getElementsByTagName("arme");
-					    final int nbarmedugladiateur = armedugladiateur.getLength();
-						for(int j=0;j<=nbarmedugladiateur;j++)
-						{
-							System.out.println("armedugladiateur : " + armedugladiateur.item(j));
-
-						}
-								
-					    //Affichage du nom et du prénom
-					    System.out.println("gladiateur : " + gladiateur.getTextContent());
-					    
-								
-					    /*
-					     * Etape 7 : récupération des numéros de téléphone
-					     */
-			    /*
-					    final NodeList telephones = personne.getElementsByTagName("telephone");
-					    final int nbTelephonesElements = telephones.getLength();
-								
-					    for(int j = 0; j<nbTelephonesElements; j++) {
-					        final Element telephone = (Element) telephones.item(j);
-					    
-			                        //Affichage du téléphone
-			                        System.out.println(telephone.getAttribute("type") + " : " + telephone.getTextContent());
-					    }	
-					    		
-			        }	
-			        	*/		
+		            
+		        	if(racineNoeuds.item(i).getNodeName().equals("gladiateurs")){
+		        		
+		        		// Noeud contenant les gladiateurs et armes
+		            	final Element gladiateurs = (Element) racineNoeuds.item(i);
+		            	
+		            	gladiateursDuFichier = this.getGladiateursFromDOM(gladiateurs);
+		        		
+		            }else if(racineNoeuds.item(i).getNodeName().equals("armes")){ //Recuperation Armes
+				    	// Noeud contenant les gladiateurs et armes
+		            	final Element armes = (Element) racineNoeuds.item(i);
+		            	armesDuFichier = this.getArmesFromDOM(armes);
+				    }
 			    }	
 	        }
         }
@@ -97,5 +84,93 @@ public class ReadXMLFile {
         catch (final IOException e) {
             e.printStackTrace();
         }		
+    }
+    
+    public ArrayList getGladiateursFromDOM(Element gladiateurs) throws Exception{
+    	ArrayList<Gladiateur> gladiateursDuDOM = new ArrayList<>();
+    	    	
+    	//premier gladiateur
+    	final NodeList gladiateurNoeuds = gladiateurs.getElementsByTagName("gladiateur");
+	    final int nbgladiateurNoeuds = gladiateurNoeuds.getLength();
+	    for (int j = 0; j<nbgladiateurNoeuds; j++){
+	    	
+		    final Element gladiateur = (Element) gladiateurNoeuds.item(j);
+		    NodeList armedugladiateur = gladiateur.getElementsByTagName("arme");
+		    final int nbarmedugladiateur = armedugladiateur.getLength();
+	    	
+		    //Affichage des infos du gladiateur
+		    int idGladiateur = Integer.parseInt(gladiateur.getAttribute("id"));
+		    
+		    final Element type = (Element) gladiateur.getElementsByTagName("type").item(0);
+		    String typeGladiateur = type.getTextContent();
+		    
+		    final Element nom = (Element) gladiateur.getElementsByTagName("nom").item(0);
+		    String nomGladiateur = nom.getTextContent();
+		   		 
+		   
+		    if(typeGladiateur.equals("retiaire")){
+		    	final Element agilite = (Element) gladiateur.getElementsByTagName("agilite").item(0);
+		    	int agiliteGladiateur = Integer.parseInt(agilite.getTextContent());
+		    	
+		    	gladiateursDuDOM.add(GGladiateur.ajouterRetiaire(idGladiateur, nomGladiateur, agiliteGladiateur));
+		    	
+		    }else{
+		    	
+		    	final Element poids = (Element) gladiateur.getElementsByTagName("poids").item(0);
+			    int poidsGladiateur = Integer.parseInt(poids.getTextContent());
+			    
+		    	gladiateursDuDOM.add(GGladiateur.ajouterMirmillon(idGladiateur, nomGladiateur, poidsGladiateur));
+		    	
+		    }
+		    
+		    
+		    
+		    // Info armes
+			for(int k=0;k<nbarmedugladiateur;k++)
+			{
+				Element e = (Element)armedugladiateur.item(k);
+				int idArme = Integer.parseInt(e.getAttribute("id"));
+				
+				Arme currentArme = GArme.getArme(idArme);
+				
+				gladiateursDuDOM.get(gladiateursDuDOM.size()-1).recevoirArme(currentArme);
+			}
+	    }
+    	return gladiateursDuDOM;
+    	
+    }
+    
+    /**
+     * Recupere la liste d'armes du fichier xml et les instancies puis stocke toutes les armes instanciees dans un tableau
+     * @param armes noeuds XML contenant les armes
+     * @return tableau des armes instanciees
+     * @throws Exception
+     */
+	public ArrayList getArmesFromDOM(Element armes) throws Exception{
+    	ArrayList<Arme> armesDuDOM = new ArrayList<>();
+    	
+    	final NodeList armeNoeuds = armes.getElementsByTagName("arme");
+	    final int nbarmeNoeuds = armeNoeuds.getLength();
+	    
+	    //Pour chaque noeud du DOM Xml contenant une arme, recupere les infos pour instancier l'arme
+	    for (int j = 0; j<nbarmeNoeuds; j++){
+	    	Element arme = (Element)armeNoeuds.item(j);
+			int idArme = Integer.parseInt(arme.getAttribute("id"));
+			
+			final Element nom = (Element) arme.getElementsByTagName("nom").item(0);
+		    String nomArme = nom.getTextContent();
+		    
+		    final Element puissancOffensive = (Element) arme.getElementsByTagName("puissancOffensive").item(0);
+		    int puissancOffensiveArme = Integer.parseInt(puissancOffensive.getTextContent());
+		    
+		    final Element puissanceDefensive = (Element) arme.getElementsByTagName("puissanceDefensive").item(0);
+		    int puissanceDefensiveArme = Integer.parseInt(puissanceDefensive.getTextContent());
+		   
+		    Arme nouvelleArme = GArme.ajouterArme(idArme, nomArme, puissancOffensiveArme, puissanceDefensiveArme);
+		    
+		    armesDuDOM.add(nouvelleArme);
+	    }
+	    
+		return armesDuDOM;
     }
 }

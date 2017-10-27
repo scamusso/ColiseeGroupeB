@@ -22,7 +22,7 @@ public class Menu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Stub de la méthode généré automatiquement
+		// TODO Stub de la methode genere automatiquement
 		afficherMenu();
 
 	}
@@ -31,20 +31,20 @@ public class Menu {
 		try {		
 			boolean fin = false;
 			
-			// initialisation des jeux de données
+			// initialisation des jeux de donnees
 			Facade partie = new Facade();
 			
 			while(!fin) {
 				System.out.println("Bienvenu dans le jeu des gladiateur"); 
 				
-				System.out.println("0.	Lancer le jeu d'essai initial ci-dessous (6 armes, 6 gladiateurs avec leur équipement)");
-				System.out.println("1.	Créer un rétiaire (avec son nom, son agilité)");
-				System.out.println("2.	Créer un mirmillon (avec son nom, son poids)");
-				System.out.println("3.	Créer une arme (avec son nom, sa puissanceOff, sa puissanceDef");
-				System.out.println("4.	(Début du combat) : Lister tous les gladiateurs : salut et armes");
+				System.out.println("0.	Lancer le jeu d'essai initial ci-dessous (6 armes, 6 gladiateurs avec leur equipement)");
+				System.out.println("1.	Creer un retiaire (avec son nom, son agilite)");
+				System.out.println("2.	Creer un mirmillon (avec son nom, son poids)");
+				System.out.println("3.	Creer une arme (avec son nom, sa puissanceOff, sa puissanceDef");
+				System.out.println("4.	(Debut du combat) : Lister tous les gladiateurs : salut et armes");
 				System.out.println("5.	Afficher le rapport du gladiateur d'identifiant idg");
 				System.out.println("6.	Donner une arme ida au gladiateur idg");
-				System.out.println("7.	Frapper (avec idg de l'agresseur, idg de l'agressé, ida de l'arme utilisée)");
+				System.out.println("7.	Frapper (avec idg de l'agresseur, idg de l'agresse, ida de l'arme utilisee)");
 				System.out.println("8.	Supprimer du jeu le gladiateur idg");
 				System.out.println("999.Quitter le jeu\n");
 				
@@ -56,16 +56,16 @@ public class Menu {
 						partie.lancerJeuDEssai();
 					break;
 					case 1 :
-						System.out.println("Veuillez rentrer les informations pour créer un rétiare");
+						System.out.println("Veuillez rentrer les informations pour creer un retiare");
 						partie.creerRetiaire(verifierSaisieString("nom : "), verifierSaisieInt("Agilite :"));
 					break;
 					case 2 :
-						System.out.println("Veuillez rentrer les informations pour créer un mirmillon");
+						System.out.println("Veuillez rentrer les informations pour creer un mirmillon");
 						partie.creerMirmillon(verifierSaisieString("nom : "), verifierSaisieInt("Poids :"));
 					break;
 					case 3 :
-						System.out.println("Veuillez rentrer les informations pour créer une arme");
-						partie.creerUneArme(verifierSaisieString("nom : "), verifierSaisieInt("Puissance Offensive : "), verifierSaisieInt("Puissance défensive :"));
+						System.out.println("Veuillez rentrer les informations pour creer une arme");
+						partie.creerUneArme(verifierSaisieString("nom : "), verifierSaisieInt("Puissance Offensive : "), verifierSaisieInt("Puissance defensive :"));
 					break;
 					case 4 :
 						for(Gladiateur gladiateur : partie.listerTousLesGladiateurs ()) {
@@ -131,7 +131,7 @@ public class Menu {
 	         
 	        if (erreur == 1)
 	        {
-	            System.out.println("Veuillez rentrer un eniter");
+	            System.out.println("Veuillez rentrer un entier");
 	        }
 	             
 	    } while (erreur == 1);
@@ -164,7 +164,7 @@ public class Menu {
 	         
 	        if (erreur == 1)
 	        {
-	            System.out.println("Veuillez rentrer une chaîne de caractère");
+	            System.out.println("Veuillez rentrer une chaine de caractere");
 	        }
 	             
 	    } while (erreur == 1);

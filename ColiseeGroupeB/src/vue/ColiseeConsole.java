@@ -11,16 +11,30 @@ public class ColiseeConsole {
 	private static String filepath;
 
 	public static void main(String[] args) {
+		
+		//@TODO Mettre en paramtre dans la console le chemin du fichier jeu d'essai
+		
+		String filepath = Menu.verifierSaisieString("Veuillez saisir le chemin du fichier de jeu d'essai :");
+		
+		System.out.println("chemin entré : "+filepath);
+		//  C:\Users\Aline.FRIERA\git\ColiseeGroupeB\ColiseeGroupeB\jeuDEssai.xml
+		
 		//filepath = getFilePath();
 		CColiseeConsole coliseeconsole = new CColiseeConsole();
-		coliseeconsole.chargerJeuDEssai();
+		
+		//RÃ©cuperer fichier XML
+		//String filepath = "jeuDEssai.xml";
+		coliseeconsole.chargerJeuDEssai(filepath);
+		
+		
+		
 		try {
 			CColiseeConsole.lancerCombat();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		ReadXMLFile.main(args);
+		//ReadXMLFile.main(args);
 	}
 	/*
 	public static String getFilePath()

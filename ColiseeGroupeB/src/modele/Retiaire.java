@@ -66,7 +66,7 @@ public class Retiaire extends Gladiateur  {
 	}
 
 	public int getForce() {
-		return Retiaire.cForce ;
+		return Retiaire.cForce + this.agilite ;
 	}
 
 	public String getType() {
