@@ -14,6 +14,7 @@ public class CColiseeConsole extends Facade{
 	private static GGladiateur gGladiateur;
 	private static GArme gArme;
 	private static Random randomGenerator;
+	
 
 	/**
 	 * Constructeur
@@ -45,7 +46,7 @@ public class CColiseeConsole extends Facade{
 	public static void lancerCombat() throws Exception{
 		
 		//Avant le combat Pour chaque gladiateur
-		System.out.println("Bienvenu dans le jeu des gladiateurs !");
+		System.out.println("\n Bienvenu dans le jeu des gladiateurs ! \n" );
 		ArrayList<Gladiateur> touslesgladiateurs = Facade.listerTousLesGladiateurs();
 		ArrayList<Integer> touslesidgladiateurs=new ArrayList<Integer>();
 		
@@ -61,6 +62,7 @@ public class CColiseeConsole extends Facade{
 			
 		}
 		
+		System.out.println("\n");
 		
 		//lancer les recherches
 		for(CombatGladiateur combat:combats){
@@ -92,9 +94,9 @@ public class CColiseeConsole extends Facade{
 	 */
 	public static void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) throws Exception {
 		if(!gGladiateur.getGladiateur(pIdAgresseur).estMoribond() && ! gGladiateur.getGladiateur(pIdVictime).estMoribond()) {
-			System.out.println(gGladiateur.getGladiateur(pIdAgresseur).messageAgresseur(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme)));
+			System.out.println(gGladiateur.getGladiateur(pIdAgresseur).messageAgresseur(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme))+"\n");
 			gGladiateur.getGladiateur(pIdAgresseur).frapper(gGladiateur.getGladiateur(pIdVictime), gArme.getArme(pIdArme));
-			System.out.println(gGladiateur.getGladiateur(pIdVictime).messageVictime(gGladiateur.getGladiateur(pIdAgresseur), gArme.getArme(pIdArme)));
+			System.out.println(gGladiateur.getGladiateur(pIdVictime).messageVictime(gGladiateur.getGladiateur(pIdAgresseur), gArme.getArme(pIdArme))+"\n");
 		}
 	}
 }
