@@ -18,14 +18,16 @@ public class ColiseeConsole {
 	
 	public static void main(String[] args) {
 		
-		
-		String filepath = Menu.verifierSaisieString("Veuillez saisir le chemin du fichier de jeu d'essai :\n");
+		String filepath;
+		try{
+			
+			filepath = args[0];
+		}catch(Exception e){
+			
+			filepath = Menu.verifierSaisieString("Veuillez saisir le chemin du fichier de jeu d'essai :\n");
+		}
 		
 		System.out.println("chemin entré : "+filepath);
-		
-		//  C:\Users\Aline.FRIERA\git\ColiseeGroupeB\ColiseeGroupeB\jeuDEssai2.xml
-		
-		//String filepath = "jeuDEssai2.xml";
 		
 		CColiseeConsole coliseeconsole = new CColiseeConsole();
 		

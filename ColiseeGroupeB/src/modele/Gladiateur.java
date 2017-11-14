@@ -48,10 +48,10 @@ public abstract class Gladiateur {
 	public String[] declarerMesArmes() {
 		String tableauArmes[] = new String[mesArmes.size()];
 		int compteur = 0;
-		String rapport = "";
+		//String rapport = "";
 		for (Arme object: mesArmes) {
 			tableauArmes[compteur] = object.description();
-			rapport += tableauArmes[compteur];
+			//rapport += tableauArmes[compteur];
 			compteur++;	
 		}
 		return tableauArmes;
@@ -141,11 +141,10 @@ public abstract class Gladiateur {
 		if (estBienPortant()) {
 			etatGladiateur = "Bien portant";
 		} else if (estBlesse()) {
-			etatGladiateur = "Blessé";
+			etatGladiateur = "Bless�";
 		} else {
 			etatGladiateur = "Moribond";
 		}
-
 		return idGladiateur  + " " + nom + " "+ etatGladiateur + " " + vie + " " + this.getForce() + " " + String.join(" ",declarerMesArmes());
 	}	
 
@@ -176,7 +175,7 @@ public abstract class Gladiateur {
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception{
 		if(agresseur == null || forceCoup < 0) {
-			throw new ExceptionGladiateur("Un Gladiateur ne peut recevoir un coup avec une Force négative ou recevoir un coup d'un Gladiateur inexistant");
+			throw new ExceptionGladiateur("Un Gladiateur ne peut recevoir un coup avec une Force negative ou recevoir un coup d'un Gladiateur inexistant");
 		}
 		if (agresseur != this && (!estMoribond())){
 			int defArme = 0;
@@ -199,7 +198,7 @@ public abstract class Gladiateur {
 	 * @return salutation
 	 */
 	public String saluer() {
-		return "Ave Caesar, " + this.getType() + " N°" + this.getIdGladiateur() + " : " + this.getNom();
+		return "Ave Caesar, " + this.getType() + " N�" + this.getIdGladiateur() + " : " + this.getNom();
 	}
 
 
@@ -236,14 +235,14 @@ public abstract class Gladiateur {
 
 	public static void setCVieInitiale(int cVieInitiale) throws Exception {
 		if(cVieInitiale <= 0) {
-			throw new ExceptionGladiateur("La vie initial d'un Gladiateur ne peut inférieur ou égal à 0");
+			throw new ExceptionGladiateur("La vie initial d'un Gladiateur ne peut inferieur ou egal a 0");
 		}
 		Gladiateur.cVieInitiale = cVieInitiale;
 	}
 
 	public void setVie(int vie) throws Exception {
 		if(vie < 0) {
-			throw new ExceptionGladiateur("La vie d'un gladiateur ne peut pas être inférieur à 0");
+			throw new ExceptionGladiateur("La vie d'un gladiateur ne peut pas etre inferieur a 0");
 		}
 		this.vie = vie;
 	}
@@ -257,7 +256,7 @@ public abstract class Gladiateur {
 	
 	private void setIdGladiateur(int idGladiateur) throws Exception {
 		if(idGladiateur < 0) {
-			throw new ExceptionGladiateur("L'id d'un Gladiateur ne peut pas être négatif");
+			throw new ExceptionGladiateur("L'id d'un Gladiateur ne peut pas etre negatif");
 		}
 		this.idGladiateur = idGladiateur;
 	}
@@ -265,7 +264,7 @@ public abstract class Gladiateur {
 
 	private void setNom(String nom) throws Exception {
 		if(nom.isEmpty() || nom == null) {
-			throw new ExceptionGladiateur("Le nom d'un gladiateur ne peut être vide");
+			throw new ExceptionGladiateur("Le nom d'un gladiateur ne peut etre vide");
 		}
 		this.nom = nom;
 	}

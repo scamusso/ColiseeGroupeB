@@ -33,7 +33,11 @@ public class CombatGladiateur extends Thread {
 	}
 	
 	
-	
+	/**
+	 * Effectue le combat d'un gladiateur
+	 * @param gladiateur
+	 * @return le gladiateur gagnant
+	 */
 	public Gladiateur combattre(Gladiateur gladiateur) /*throws Exception*/{
 		
 		while(tousLesGladiateurs.size()>1){
@@ -54,12 +58,14 @@ public class CombatGladiateur extends Thread {
 				
 				
 				//Choisit aleatoirement une arme offensive parmis ses armes
-				
+				int puissOffArme =0;
+				int pIdArme = 0;
 				ArrayList<Arme> touteslesarmesdugladiateur = CColiseeConsole.declarerArmes(pIdAgresseur);
-				
-				int index = randomGenerator.nextInt(touteslesarmesdugladiateur.size());
-				int pIdArme = touteslesarmesdugladiateur.get(index).getIdArme();
-				
+				while(puissOffArme==0){
+					int index = randomGenerator.nextInt(touteslesarmesdugladiateur.size());
+					pIdArme = touteslesarmesdugladiateur.get(index).getIdArme();
+					puissOffArme = touteslesarmesdugladiateur.get(index).getPuissanceOffensive();
+				}
 				
 				
 				//Frappe sa cible
@@ -103,7 +109,6 @@ public class CombatGladiateur extends Thread {
 	 */
 	public void run(){
 		randomGenerator = new Random();
-		//System.out.println("debut combat pour glad : "+gladiateur.getIdGladiateur() +"\n");
 		
 		if(combattre(gladiateur) != null){
 			gagnant = combattre(gladiateur);

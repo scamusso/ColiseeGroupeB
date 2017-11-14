@@ -44,7 +44,12 @@ public class Mirmillon extends Gladiateur {
 	 */
 	
 	public String rapport() {
-		return super.rapport() + " " + getMesAggresseurs() ;
+		ArrayList<Gladiateur> mesAgresseurs = getMesAggresseurs();
+		String listeAgresseur = "";
+		for(Gladiateur agresseur:mesAgresseurs){
+			listeAgresseur += agresseur.getNom()+" ";
+		}
+		return super.rapport() + " "+listeAgresseur;
 	}	
 	
 	/**

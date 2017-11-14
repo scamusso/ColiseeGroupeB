@@ -21,11 +21,11 @@ public class Menu {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Stub de la methode genere automatiquement
 		afficherMenu();
 
-	}
+	}*/
 	
 	public static void afficherMenu() {
 		try {		

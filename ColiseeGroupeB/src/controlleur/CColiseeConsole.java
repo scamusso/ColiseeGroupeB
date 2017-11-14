@@ -7,7 +7,11 @@ import modele.CombatGladiateur;
 import modele.Gladiateur;
 import modele.ReadXMLFile;
 
-
+/**
+ * Herite de la classe Facade, Permet la gestion des combats automatis�s
+ * @author Aline
+ *
+ */
 public class CColiseeConsole extends Facade{
 	
 	// Variable de classe
@@ -30,11 +34,10 @@ public class CColiseeConsole extends Facade{
 	 */
 	public static void chargerJeuDEssai(String filepath){
 		
-		//Pour Chaque infos du fichier, Créer Gladiateurs et Armes
+		//Pour Chaque infos du fichier, Creer Gladiateurs et Armes
 		try {
 			new ReadXMLFile(filepath);
 		} catch (Exception e) {
-			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
 	}
@@ -64,7 +67,7 @@ public class CColiseeConsole extends Facade{
 		
 		System.out.println("\n");
 		
-		//lancer les recherches
+		//lancer les combats
 		for(CombatGladiateur combat:combats){
 			combat.start();
 		}
@@ -74,19 +77,21 @@ public class CColiseeConsole extends Facade{
 			Thread.sleep(100);
 		}
 		
+		//Annonce le gladiateur gagnant
 		for(CombatGladiateur combat:combats){
 			 Gladiateur gagnant = combat.getGagnant();
 			 if(gagnant !=null){
 				System.out.println("Gladiateur gagnant : ");
 				System.out.println(gagnant.rapport());
+				System.out.println("FIN");
 				System.exit (0);
 				return;
 			 }
-		  }
+		}
 	}
 	
 	/**
-	 * Methode qui permet de lancer l'action frapper
+	 * Methode qui permet de lancer l'action frapper en ajoutant les messages des gladiateurs agresseur et victime
 	 * @param pIdAgresseur : int
 	 * @param pIdVictime : int
 	 * @param pIdArme: int

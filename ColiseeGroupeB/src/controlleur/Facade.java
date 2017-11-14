@@ -10,13 +10,14 @@ import modele.Gladiateur;
 
 /**
  * @author clement
- * Controleur permettant la gestion des �v�nement li�e aux Gladiateurs
+ * Controleur permettant la gestion des evenement liee aux Gladiateurs
  */
 public class Facade {
 
 	// Variable de classe
-	private static GGladiateur gGladiateur;
-	private static GArme gArme;
+	protected static GGladiateur gGladiateur;
+	protected static GArme gArme;
+
 
 	/**
 	 * Constructeur
@@ -33,7 +34,7 @@ public class Facade {
 	 * @throws Exception 
 	 */
 	public static void lancerJeuDEssai() throws Exception {
-		creerRetiaire("Unix", 30);
+		/*creerRetiaire("Unix", 30);
 		creerMirmillon("Infomatix", 100);
 		creerRetiaire("Ceplusplus", 40);
 		creerMirmillon("Pythonus", 60);
@@ -60,14 +61,14 @@ public class Facade {
 		donnerUneArme(5, 1);
 		donnerUneArme(5, 6);
 		donnerUneArme(6, 4);
-		donnerUneArme(6, 5);
+		donnerUneArme(6, 5);*/
 	}
 
 	/**
 	 * Creer un Retiaire dans la partie
 	 * @param pNom nom du gladiateur
-	 * @param pAgilite agilit� du gladiateur
-	 * @return le gladiateur cr�er
+	 * @param pAgilite agilite du gladiateur
+	 * @return le gladiateur creer
 	 * @throws Exception 
 	 */
 	public static Gladiateur creerRetiaire(String pNom, int pAgilite) throws Exception {
@@ -75,10 +76,10 @@ public class Facade {
 	}
 
 	/**
-	 * Cr�er un Mirmillon dans la partie
+	 * Creer un Mirmillon dans la partie
 	 * @param pNom nom du gladiateur
-	 * @param pAgilite agilit� du gladiateur
-	 * @return le gladiateur cr�er
+	 * @param pAgilite agilite du gladiateur
+	 * @return le gladiateur creer
 	 * @throws Exception 
 	 */
 	public static Gladiateur creerMirmillon(String pNom, int pPoids) throws Exception {
@@ -93,7 +94,7 @@ public class Facade {
 	}
 
 	/**
-	 * Retourne la liste des agresseur du gladiateur dont l'id est pass� en param�tre
+	 * Retourne la liste des agresseur du gladiateur dont l'id est passe en parametre
 	 * @param pIdGladiateur
 	 * @return liste des gladiateurs (objet) 
 	 */
@@ -105,7 +106,7 @@ public class Facade {
 	}
 
 	/**
-	 * Renvoie une cha�ne de carract�re
+	 * Renvoie une chaine de caracteres
 	 * @param pIdGladiateur
 	 * @return String 
 	 */
@@ -117,7 +118,7 @@ public class Facade {
 	}
 
 	/**
-	 * Retourne le rapport du gladiateur dont l'id est pass� en param�tre
+	 * Retourne le rapport du gladiateur dont l'id est passe en parametre
 	 * @param pIdGladiateur
 	 * @return String
 	 */
@@ -129,7 +130,7 @@ public class Facade {
 	}
 
 	/**
-	 * Retourne les armes du gladiateur dont l'id est pass� en param�tre
+	 * Retourne les armes du gladiateur dont l'id est passe en parametre
 	 * @param pIdGladiateur
 	 * @return ArrayList<Arme>
 	 */
@@ -142,7 +143,7 @@ public class Facade {
 
 
 	/**
-	 * Supprime le gladiateur dont l'id est pass� en param�tre
+	 * Supprime le gladiateur dont l'id est passe en parametre
 	 * @param pIdGladiateur : int
 	 */
 	public static void supprimerGladiateur(int pIdGladiateur) {
@@ -177,7 +178,7 @@ public class Facade {
 	}
 
 	/**
-	 * Retourne la description d'une arme en fonction de l'id pass� en param�tre
+	 * Retourne la description d'une arme en fonction de l'id passe en parametre
 	 * @param pIdArme
 	 * @return String
 	 */
@@ -189,7 +190,7 @@ public class Facade {
 	}
 
 	/**
-	 * Renvoie le nom de l'arme dont l'id est pass� en param�tre
+	 * Renvoie le nom de l'arme dont l'id est passe en parametre
 	 * @param pIdArme
 	 * @return String
 	 */

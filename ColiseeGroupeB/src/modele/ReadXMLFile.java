@@ -37,22 +37,34 @@ public class ReadXMLFile {
     public ReadXMLFile(String filepath) throws Exception {
     	
     	
-    	//@TODO Fichier trouvé ?
-    	/*File file = new File(filepath);
-    	try{
-    		file.exists();
+    	//Verifie si le fichier passe en parametre existe
+    	File file = new File(filepath);
+    	if(file.exists()){
     		String canonicalName = file.getCanonicalFile().getName();
-      	  	return canonicalName.equals(filepath);
-    	}catch(Exception e){
-    		return false;
+    		System.out.println("fichier trouvé");
+    	}else{
+    		throw new Exception("le fichier n'a pas ete trouvé");
+    		/*System.out.println("le fichier n'a pas ete trouvé");
+    		System.exit (0);*/
     	}
-    	*/
-    	//@TODO Fichier Xml ?
+    	System.out.println(file.getName());
+    	
+    	//Verifie si le fichier est bien de type XML
+    	if (file.getName().lastIndexOf(".") > 0) {
+    	    // On récupère l'extension du fichier
+    	    String ext = file.getName().substring(file.getName().lastIndexOf("."));
+    	    // Si le fichier n'est pas en .xml declanche une erreur
+    	    if (!ext.equals(".xml")) {
+    	    	throw new Exception("le type de fichier n'est pas autorisé");
+    	    }
+    	} else {
+    		throw new Exception("le type de fichier n'est pas autorisé");
+    	}
     	
         //Recuperation d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             	
-	        try {
+        try {
 	            //Creation d'un parseur
 	            final DocumentBuilder builder = factory.newDocumentBuilder();
 				
