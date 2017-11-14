@@ -19,38 +19,51 @@ import controlleur.Facade;
 import controlleur.GArme;
 import controlleur.GGladiateur;
 
+/**
+ * Lecture d'un fichier XML et instanciation des gladiateurs et armes qu'il contient
+ * @author Aline
+ *
+ */
 public class ReadXMLFile {
 	
 	private static ArrayList<Gladiateur> gladiateursDuFichier;
 	private static ArrayList<Arme> armesDuFichier;
 	 
-	
+	/**
+	 * Constructeur
+	 * @param filepath chemin d'acces au fichier XML
+	 * @throws Exception
+	 */
     public ReadXMLFile(String filepath) throws Exception {
-        /*
-         * Etape 1 : recuperation d'une instance de la classe "DocumentBuilderFactory"
-         */
+    	
+    	
+    	//@TODO Fichier trouvé ?
+    	/*File file = new File(filepath);
+    	try{
+    		file.exists();
+    		String canonicalName = file.getCanonicalFile().getName();
+      	  	return canonicalName.equals(filepath);
+    	}catch(Exception e){
+    		return false;
+    	}
+    	*/
+    	//@TODO Fichier Xml ?
+    	
+        //Recuperation d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             	
 	        try {
-	            /*
-	             * Etape 2 : creation d'un parseur
-	             */
+	            //Creation d'un parseur
 	            final DocumentBuilder builder = factory.newDocumentBuilder();
 				
-		    /*
-		     * Etape 3 : creation d'un Document
-		     */
+		    //Creation d'un Document
 		    final Document document= builder.parse(new File(filepath));
 		   
 						
-		    /*
-		     * Etape 4 : recuperation de l'Element racine
-		     */
+		    //Recuperation de l'Element racine
 		    final Element racine = document.getDocumentElement();
 			
-		    /*
-		     * Etape 5 : recuperation des personnes
-		     */
+		    //Recuperation des noeuds
 		    final NodeList racineNoeuds = racine.getChildNodes();
 		    final int nbRacineNoeuds = racineNoeuds.getLength();
 		    
@@ -62,15 +75,16 @@ public class ReadXMLFile {
 		            
 		        	if(racineNoeuds.item(i).getNodeName().equals("gladiateurs")){
 		        		
-		        		// Noeud contenant les gladiateurs et armes
+		        		// Noeud contenant les gladiateurs
 		            	final Element gladiateurs = (Element) racineNoeuds.item(i);
-		            	
 		            	gladiateursDuFichier = this.getGladiateursFromDOM(gladiateurs);
 		        		
-		            }else if(racineNoeuds.item(i).getNodeName().equals("armes")){ //Recuperation Armes
-				    	// Noeud contenant les gladiateurs et armes
+		            }else if(racineNoeuds.item(i).getNodeName().equals("armes")){
+				    	
+		            	// Noeud contenant les armes
 		            	final Element armes = (Element) racineNoeuds.item(i);
 		            	armesDuFichier = this.getArmesFromDOM(armes);
+		            	
 				    }
 			    }	
 	        }
@@ -86,6 +100,28 @@ public class ReadXMLFile {
         }		
     }
     
+    private static ArrayList<Gladiateur> getGladiateursDuFichier() {
+		return gladiateursDuFichier;
+	}
+
+	private static void setGladiateursDuFichier(ArrayList<Gladiateur> gladiateursDuFichier) {
+		ReadXMLFile.gladiateursDuFichier = gladiateursDuFichier;
+	}
+
+	private static ArrayList<Arme> getArmesDuFichier() {
+		return armesDuFichier;
+	}
+
+	private static void setArmesDuFichier(ArrayList<Arme> armesDuFichier) {
+		ReadXMLFile.armesDuFichier = armesDuFichier;
+	}
+
+	/**
+     * Recupere la liste des gladiateurs du fichier xml et les instancies puis stocke tous les gladiateurs instanciees dans un tableau
+     * @param gladiateurs noeuds XML contenant les gladiateurs
+     * @return tableau des gladiateurs instanciees
+     * @throws Exception
+     */
     public ArrayList getGladiateursFromDOM(Element gladiateurs) throws Exception{
     	ArrayList<Gladiateur> gladiateursDuDOM = new ArrayList<>();
     	    	
