@@ -31,6 +31,7 @@ public class CColiseeConsole extends Facade{
 	
 	/**
 	 * Chargement du jeu d'essai
+	 * @param filepath chemin du fichier xml a charger
 	 */
 	public static void chargerJeuDEssai(String filepath){
 		
@@ -44,7 +45,7 @@ public class CColiseeConsole extends Facade{
 	
 	/**
 	 * Lancement du combat automatique 
-	 * @throws Exception 
+	 * @throws Exception Releve les erreurs
 	 */
 	public static void lancerCombat() throws Exception{
 		
@@ -95,7 +96,7 @@ public class CColiseeConsole extends Facade{
 	 * @param pIdAgresseur : int
 	 * @param pIdVictime : int
 	 * @param pIdArme: int
-	 * @throws Exception 
+	 * @throws Exception Leve une erreur si le gladiateur est deja mort
 	 */
 	public static void frapper(int pIdAgresseur, int pIdVictime, int pIdArme) throws Exception {
 		if(!gGladiateur.getGladiateur(pIdAgresseur).estMoribond() && ! gGladiateur.getGladiateur(pIdVictime).estMoribond()) {

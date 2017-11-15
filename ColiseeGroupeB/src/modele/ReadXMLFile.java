@@ -156,7 +156,7 @@ public class ReadXMLFile {
 		    String nomGladiateur = nom.getTextContent();
 		   		 
 		   
-		    if(typeGladiateur.equals("retiaire")){
+		    if(typeGladiateur.equals("retiaire") || typeGladiateur.equals("Retiaire") ){
 		    	final Element agilite = (Element) gladiateur.getElementsByTagName("agilite").item(0);
 		    	int agiliteGladiateur = Integer.parseInt(agilite.getTextContent());
 		    	
@@ -164,8 +164,15 @@ public class ReadXMLFile {
 		    	
 		    }else{
 		    	
-		    	final Element poids = (Element) gladiateur.getElementsByTagName("poids").item(0);
-			    int poidsGladiateur = Integer.parseInt(poids.getTextContent());
+			    int poidsGladiateur;
+			    try {
+			    	final Element poids = (Element) gladiateur.getElementsByTagName("poids").item(0);
+				    poidsGladiateur = Integer.parseInt(poids.getTextContent());
+			    } 
+			    catch(java.lang.NumberFormatException e)
+			    {
+			    	poidsGladiateur = 0 ;
+			    }
 			    
 		    	gladiateursDuDOM.add(GGladiateur.ajouterMirmillon(idGladiateur, nomGladiateur, poidsGladiateur));
 		    	

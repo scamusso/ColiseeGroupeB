@@ -41,7 +41,7 @@ public class GGladiateur {
 	
 	/**
 	 * Ajoute un gladiateur de type Mirimillon � la lste des gladiateurs
-	 * @param idGladiateur
+	 * @param idGladiateur Id du gladiateur a creer
 	 * @param pNom nom du gladiateur
 	 * @param pPoids son poids
 	 * @return l'objet gladiateur cr�er
@@ -66,7 +66,7 @@ public class GGladiateur {
 	
 	/**
 	 * Ajoute un gladiateur de type Mirimillon � la lste des gladiateurs
-	 * @param idGladiateur
+	 * @param idGladiateur Id du gladiateur a ajouter
 	 * @param pNom nom du gladiateur
 	 * @param pAgilite son agilit�
 	 * @return l'objet gladiateur cr�er
@@ -78,8 +78,8 @@ public class GGladiateur {
 	}
 	
 	/**
-	 * M�thode qui renvoie l'ensembles des gladiateurs en jeu
-	 * @return Liste de gladiateurs "ArrayList<Gladiateur>()"
+	 * Mehode qui renvoie l'ensembles des gladiateurs en jeu
+	 * @return ArrayList Liste de gladiateurs
 	 */
 	public static ArrayList<Gladiateur> getTousLesGladiateurs() {
 		return tousLesGladiateurs;
@@ -87,10 +87,11 @@ public class GGladiateur {
 	
 	/**
 	 * Retourne le gladiateur dont l'id est pass� en param�tre
-	 * @param pIdGladiateur
+	 * @param pIdGladiateur Id du gladiateur a recuperer
 	 * @return Gladiateur
 	 */
 	public static Gladiateur getGladiateur(int pIdGladiateur) {
+		System.out.println(pIdGladiateur);
 		for(Gladiateur gladiateur : tousLesGladiateurs) {
 			if(gladiateur.getIdGladiateur()==pIdGladiateur) {
 				return gladiateur;
@@ -101,7 +102,7 @@ public class GGladiateur {
 	
 	/**
 	 * Supprime de la liste des gladiateurs le gladiateur correspondant � l'id
-	 * @param pIdGladiateur
+	 * @param pIdGladiateur Id du gladiateur a supprimer
 	 */
 	public static  void supprimerGladiateur(int pIdGladiateur) {
 		Gladiateur gladiateur = getGladiateur(pIdGladiateur);
@@ -111,7 +112,7 @@ public class GGladiateur {
 	
 	/**
 	 * Supprime de la liste des gladiateurs le gladiateur passer en parametre
-	 * @param pGladiateur
+	 * @param pGladiateur Objet gladiateur a supprimer
 	 */
 	public static void supprimerGladiateur(Gladiateur pGladiateur) {
 		tousLesGladiateurs.remove(pGladiateur);

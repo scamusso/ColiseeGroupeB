@@ -24,7 +24,7 @@ public class ColiseeConsole {
 			filepath = args[0];
 		}catch(Exception e){
 			
-			filepath = Menu.verifierSaisieString("Veuillez saisir le chemin du fichier de jeu d'essai :\n");
+			filepath = verifierSaisieString("Veuillez saisir le chemin du fichier de jeu d'essai :\n");
 		}
 		
 		System.out.println("chemin entré : "+filepath);
@@ -40,5 +40,38 @@ public class ColiseeConsole {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Controle de saisie
+	 * @param pTxt Texte a afficher dans la console
+	 * @return la saisie controller
+	 */
+	public static String verifierSaisieString(String pTxt)
+	{
+	    String reponse = "";
+	    scan = new Scanner(System.in);
+	    int erreur = 0;
+	    int p = 0;
+	    do
+	    {
+	    	System.out.print(pTxt);
+	        reponse = scan.nextLine();
+	        try
+	        {
+	            p=Integer.parseInt(reponse);
+	        }
+	        catch (NumberFormatException e)
+	        {
+	            erreur = 0;
+	        }
+	         
+	        if (erreur == 1)
+	        {
+	            System.out.println("Veuillez rentrer une chaine de caractere");
+	        }
+	             
+	    } while (erreur == 1);
+	    return reponse;
 	}
 }

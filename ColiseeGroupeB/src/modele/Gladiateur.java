@@ -26,8 +26,8 @@ public abstract class Gladiateur {
 	/**
 	 * Constructeur
 	 * 
-	 * @param idGladiateur
-	 * @param nomGladiateur
+	 * @param idGladiateur Id du gladiateur a creer
+	 * @param nomGladiateur Nom du gladiateur a creer
 	 * @throws Exception 
 	 * 
 	 * 
@@ -71,7 +71,7 @@ public abstract class Gladiateur {
 	/**
 	 * Permet de savoir si le gladiateur est blessÃ©, c'est a dire vivant mais pas bien portant
 	 * 
-	 * @return
+	 * @return boolean true/false
 	 */
 	public boolean estBlesse() {
 		return (this.getVie() < cVieInitiale && this.getVie()!=0);
@@ -81,7 +81,7 @@ public abstract class Gladiateur {
 	 * 
 	 * Permet de savoir si le gladiateur est mort
 	 * 
-	 * @return
+	 * @return boolean true/false
 	 */
 	public boolean estMoribond() {
 		return (this.getVie() == 0);
@@ -91,9 +91,9 @@ public abstract class Gladiateur {
 	 * Message prononce par le gladiateur porteur d'un coup
 	 * @param gladiateur Gladiateur qui recoit le coup
 	 * @param arme utilisee par l'agresseur pour porter le coup
-	 * 
+	 * @return String le message du gladiateur
 	 */
-	public String messageAgresseur(Gladiateur gladiateur, Arme arme) throws Exception {
+	public String messageAgresseur(Gladiateur gladiateur, Arme arme){
 		return getNom()+" frappe "+gladiateur.getNom()+" avec un(e) "+ arme.getNomArme()+" d'un coup de puissance "+ (arme.getPuissanceOffensive() + this.getForce());
 	}
 	
@@ -101,6 +101,8 @@ public abstract class Gladiateur {
 	 * Message prononce par le gladiateur victime d'un coup
 	 * @param agresseur Gladiateur porteur du coup
 	 * @param arme utilisee par l'agresseur pour porter le coup
+	 * @return String message du gladiateur
+	 * @throws Exception 
 	 */
 	public String messageVictime(Gladiateur agresseur, Arme arme) throws Exception {
 		int defArme = 0;
@@ -118,8 +120,8 @@ public abstract class Gladiateur {
 	 * 
 	 * Permet au gladiateur d'en frapper un autre avec une arme
 	 * 
-	 * @param gladiateur
-	 * @param arme
+	 * @param gladiateur Gladiateur qui est frappé
+	 * @param arme Arme qui frappe
 	 * @throws Exception 
 	 */
 	public void frapper(Gladiateur gladiateur, Arme arme) throws Exception {
@@ -151,7 +153,8 @@ public abstract class Gladiateur {
 	/**
 	 * Permet d'ajouter une arme a la collection du gladiateur
 	 * 
-	 * @param arme
+	 * @param arme Arme que le gladiateur va recevoir
+	 * @throws Exception 
 	 */
 	public void recevoirArme(Arme arme) throws Exception {
 		if(arme == null) {
@@ -170,8 +173,9 @@ public abstract class Gladiateur {
 	 * Permet de descendre la vie du gladiateur en fonction de la force du coup recu
 	 * On enregistre aussi l'agresseur pour pouvoir restituer la liste en cas de besoin
 	 * 
-	 * @param agresseur
-	 * @param forceCoup
+	 * @param agresseur Gladiateur qui donne le coup
+	 * @param forceCoup Force du coup qui est donne par l'agresseur
+	 * @throws Exception 
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception{
 		if(agresseur == null || forceCoup < 0) {

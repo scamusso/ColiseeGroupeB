@@ -42,10 +42,15 @@ public class Arme {
 	/**
 	 * Constructeur Arme
 	 * l'id, le nom, les puissances offensive et defensive sont données à la construction de l'arme 
-	 * @param idArme
-	 * @param nomArme
-	 * @param puissOff
-	 * @param puissDef
+	 * @param idArme Id de l'arme a creer
+	 * @param nomArme Nom de l'arme a creer
+	 * @param puissOff Puissance offensive de l'arme a creer
+	 * @param puissDef Puissance defensive de l'arme a creer
+	 * @throws Exception Leve une exception si
+	 * 				L'id de l'arme est inferieur ou egal � 0
+	 * 				Le nom de l'arme est vide
+	 * 				La puissance offensive d'une arme est inferieur a 0
+	 * 				La puissance defensive d'une arme est inferieur a�0
 	 */
 	public Arme(int idArme, String nomArme, int puissOff, int puissDef) throws Exception {
 		this.setIdArme(idArme);
@@ -96,35 +101,37 @@ public class Arme {
 	
 	/**
 	 * Met a jour la puissance offensive de l'arme
-	 * @param puissanceOffensive
+	 * @param puissanceOffensive La valeur de la puissance offensive a appliquer au gladiateur
+	 * @throws Exception Leve une exception si la puissance offensive est inferieur � 0
 	 */
 	public void setPuissanceOffensive(int puissanceOffensive) throws Exception {
 		if(puissanceOffensive<0){
-			throw new ExceptionArme("La puissance offensive d'une arme ne peut être inférieur à 0");
+			throw new ExceptionArme("La puissance offensive d'une arme ne peut etre inferieur a 0");
 		}
 		this.puissanceOffensive = puissanceOffensive;
 	}
 	/**
 	 * Met a jour la puissance defensive de l'arme
-	 * @param puissanceDefensive
+	 * @param puissanceDefensive La valeur de la puissance defensive a appliquer au gladiateur
+	 * @throws Exception Leve une exception si le puissance defensive est inferieur a 0
 	 */
 	public void setPuissanceDefensive(int puissanceDefensive) throws Exception {
 		if(puissanceDefensive<0){
-			throw new ExceptionArme("La puissance défensive d'une arme ne peut pas être inférieur à 0");
+			throw new ExceptionArme("La puissance defensive d'une arme ne peut pas etre inferieur � 0");
 		}
 		this.puissanceDefensive = puissanceDefensive;
 	}
     
 	private void setNomArme(String nomArme) throws Exception {
 		if(nomArme.isEmpty() && nomArme == null) {
-			throw new ExceptionArme("Le nom de l'arme de ne peut pas être vide");
+			throw new ExceptionArme("Le nom de l'arme de ne peut pas etre vide");
 		}
 		this.nomArme = nomArme;
 	}
 
     private void setIdArme(int idArme) throws Exception {
 		if(idArme <= 0) {
-			throw new ExceptionArme("L'id de l'arme de ne peut pas être inférieur ou égal à 0");
+			throw new ExceptionArme("L'id de l'arme de ne peut pas etre inferieur ou egal a 0");
 		}
         this.idArme = idArme;
     }

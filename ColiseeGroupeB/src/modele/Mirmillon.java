@@ -23,9 +23,9 @@ public class Mirmillon extends Gladiateur {
 	 * 
 	 * Constructeur de Mirmillon
 	 * 
-	 * @param idGladiateur
-	 * @param nomGladiateur
-	 * @param agilite
+	 * @param idGladiateur Id du gladiateur a creer
+	 * @param nomGladiateur nom du gladiateur a creer
+	 * @param poids Poids du gladiateur a creer
 	 * @throws Exception 
 	 */
 	public Mirmillon(int idGladiateur, String nomGladiateur, int poids) throws Exception {
@@ -58,8 +58,8 @@ public class Mirmillon extends Gladiateur {
 	 * On enregistre aussi l'agresseur pour pouvoir restituer la liste en cas de besoin
 	 * Pour le Mirmillon, on enregistre l'agresseur
 	 * 
-	 * @param agresseur
-	 * @param forceCoup
+	 * @param agresseur Gladiateur qui donne le coup
+	 * @param forceCoup Force du coup qui est donnee
 	 */
 	public void recevoirCoup(Gladiateur agresseur, int forceCoup) throws Exception{
 		super.recevoirCoup(agresseur, forceCoup);
@@ -108,7 +108,7 @@ public class Mirmillon extends Gladiateur {
 
 
 	private void setPoids(int poids) throws Exception {
-		if(poids <= 0) {
+		if(poids < 0) {
 			throw new ExceptionMirmillon("Le poid d'un Mirmillon ne peut être inférieur ou égal à 0");
 		}
 		this.poids = poids;
