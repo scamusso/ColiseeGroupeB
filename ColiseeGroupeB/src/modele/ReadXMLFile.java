@@ -156,7 +156,7 @@ public class ReadXMLFile {
 		    String nomGladiateur = nom.getTextContent();
 		   		 
 		   
-		    if(typeGladiateur.equals("retiaire") || typeGladiateur.equals("Retiaire") ){
+		    if(typeGladiateur.toLowerCase().equals("retiaire")){
 		    	final Element agilite = (Element) gladiateur.getElementsByTagName("agilite").item(0);
 		    	int agiliteGladiateur = Integer.parseInt(agilite.getTextContent());
 		    	
