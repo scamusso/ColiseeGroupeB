@@ -3,7 +3,6 @@ package controlleur;
 import java.util.ArrayList;
 import java.util.Random;
 
-import modele.CombatGladiateur;
 import modele.Gladiateur;
 import modele.ReadXMLFile;
 
@@ -70,7 +69,12 @@ public class CColiseeConsole extends Facade{
 		
 		//lancer les combats
 		for(CombatGladiateur combat:combats){
-			combat.start();
+			try{
+				combat.start();
+			}catch(Exception e){
+				System.out.println("exception "+e);
+			}
+			
 		}
 		  
 		//attendre que les processus de mon groupe soit tous terminés
@@ -86,7 +90,6 @@ public class CColiseeConsole extends Facade{
 				System.out.println(gagnant.rapport());
 				System.out.println("FIN");
 				System.exit (0);
-				return;
 			 }
 		}
 	}

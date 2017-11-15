@@ -91,7 +91,6 @@ public class GGladiateur {
 	 * @return Gladiateur
 	 */
 	public static Gladiateur getGladiateur(int pIdGladiateur) {
-		System.out.println(pIdGladiateur);
 		for(Gladiateur gladiateur : tousLesGladiateurs) {
 			if(gladiateur.getIdGladiateur()==pIdGladiateur) {
 				return gladiateur;
